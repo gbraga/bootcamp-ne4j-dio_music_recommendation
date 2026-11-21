@@ -1,10 +1,13 @@
 import { Injectable, computed, inject, linkedSignal, resource, signal } from '@angular/core';
 import { DatabaseSeeder } from '../../data/seed/database-seeder';
 import { ListeningService } from '../../domain/listening.service';
-import { AlgorithmId } from '../../domain/models';
-import { ALL_ALGORITHM_IDS } from '../../domain/recommendation-algorithms';
+import { AlgorithmId, CandidatePool } from '../../domain/models';
+import { ALL_ALGORITHM_IDS, CUSTOM_ALGORITHM } from '../../domain/recommendation-algorithms';
 import { unionRecommendations } from '../../domain/recommendation-union';
 import { RecommendationService } from '../../domain/recommendation.service';
+
+const CUSTOM_CYPHER_KEY = 'graph-music.custom-cypher';
+const EMPTY_POOL: CandidatePool = { candidates: [], tracks: [] };
 
 /** UI state for the discovery page. Components read signals and call actions. */
 @Injectable()
@@ -41,9 +44,33 @@ export class DiscoveryStore {
     loader: ({ params: userId }) => this.recommender.findCandidates(userId),
   });
 
-  readonly recommendations = computed(() =>
-    this.candidates.hasValue() ? unionRecommendations(this.candidates.value(), this.enabledAlgorithms()) : [],
-  );
+  /** Last executed custom Cypher (persisted in the browser). */
+  readonly customCypher = signal(localStorage.getItem(CUSTOM_CYPHER_KEY) ?? CUSTOM_ALGORITHM.cypher);
+
+  readonly customResult = resource({
+    params: () => {
+      const userId = this.selectedUserId();
+      return userId ? { userId, cypher: this.customCypher() } : undefined;
+    },
+    loader: ({ params }) => this.recommender.runCustom(params.userId, params.cypher),
+  });
+
+  readonly customError = computed(() => {
+    const error = this.customResult.error();
+    return error ? (error as Error).message : null;
+  });
+
+  /** Custom results come first; a failing custom query never hides the other algorithms. */
+  private readonly pool = computed<CandidatePool>(() => {
+    const builtIn = this.candidates.hasValue() ? this.candidates.value() : EMPTY_POOL;
+    const custom = this.customResult.hasValue() ? this.customResult.value() : EMPTY_POOL;
+    return {
+      candidates: [...custom.candidates, ...builtIn.candidates],
+      tracks: [...custom.tracks, ...builtIn.tracks],
+    };
+  });
+
+  readonly recommendations = computed(() => unionRecommendations(this.pool(), this.enabledAlgorithms()));
 
   readonly selectedUser = computed(() =>
     this.users.value()?.find((user) => user.userId === this.selectedUserId()),
@@ -59,7 +86,7 @@ export class DiscoveryStore {
   /** How many tracks each algorithm suggests for the selected user. */
   readonly countByAlgorithm = computed(() => {
     const counts = Object.fromEntries(ALL_ALGORITHM_IDS.map((id) => [id, 0])) as Record<AlgorithmId, number>;
-    for (const { algorithm } of this.candidates.value()?.candidates ?? []) counts[algorithm]++;
+    for (const { algorithm } of this.pool().candidates) counts[algorithm]++;
     return counts;
   });
 
@@ -80,5 +107,16 @@ export class DiscoveryStore {
       return next;
     });
     if (!enabled && this.highlightedAlgorithm() === id) this.highlightedAlgorithm.set(null);
+  }
+
+  runCustom(cypher: string): void {
+    localStorage.setItem(CUSTOM_CYPHER_KEY, cypher);
+    if (cypher === this.customCypher()) this.customResult.reload();
+    else this.customCypher.set(cypher);
+  }
+
+  resetCustom(): void {
+    localStorage.removeItem(CUSTOM_CYPHER_KEY);
+    this.customCypher.set(CUSTOM_ALGORITHM.cypher);
   }
 }

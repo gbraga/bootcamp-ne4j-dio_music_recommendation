@@ -16,9 +16,8 @@ const TOKEN = new RegExp(
 const escapeHtml = (text: string) =>
   text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-/** Turns Cypher source into HTML with `cy-*` token classes. */
-export function highlightCypher(source: string): string {
-  const code = source.trim();
+/** Turns Cypher source into HTML with `cy-*` token classes (whitespace is preserved). */
+export function highlightCypher(code: string): string {
   let html = '';
   let cursor = 0;
   for (const match of code.matchAll(TOKEN)) {

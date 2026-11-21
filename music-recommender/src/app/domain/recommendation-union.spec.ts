@@ -46,4 +46,13 @@ describe('unionRecommendations', () => {
     const [b] = unionRecommendations(pool, new Set<AlgorithmId>(['top-tracks']));
     expect(b.algorithms).toEqual(['top-tracks']);
   });
+
+  it('ignores candidates whose track does not exist (e.g. a custom query returning an unknown id)', () => {
+    const withUnknown: CandidatePool = {
+      ...pool,
+      candidates: [{ trackId: 'missing', algorithm: 'custom', reason: 'x' }, ...pool.candidates],
+    };
+    const result = unionRecommendations(withUnknown, new Set<AlgorithmId>(['custom', 'same-age']));
+    expect(result.map((r) => r.track.trackId)).toEqual(['a']);
+  });
 });

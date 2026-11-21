@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { RecommendationRepository } from '../data/repositories/recommendation.repository';
 import { TrackRepository } from '../data/repositories/track.repository';
 import { CandidatePool, RecommendationCandidate } from './models';
-import { SAME_AGE_RANGE } from './recommendation-algorithms';
+import { CUSTOM_RESULT_LIMIT, SAME_AGE_RANGE } from './recommendation-algorithms';
 
 const plural = (count: number, singular: string, pluralForm: string) =>
   `${count} ${count === 1 ? singular : pluralForm}`;
@@ -26,6 +26,22 @@ export class RecommendationService {
       ])
     ).flat();
 
+    const tracks = await this.tracks.findByIds([...new Set(candidates.map((c) => c.trackId))]);
+    return { candidates, tracks };
+  }
+
+  /** Runs the user's own Cypher and turns its rows into candidates of the `custom` algorithm. */
+  async runCustom(userId: string, cypher: string): Promise<CandidatePool> {
+    const rows = (await this.recommendations.runCustom(cypher, userId)).slice(0, CUSTOM_RESULT_LIMIT);
+    if (rows.length > 0 && typeof rows[0]['trackId'] !== 'string') {
+      throw new Error('A consulta precisa retornar a coluna "trackId" (ex.: RETURN track.trackId AS trackId).');
+    }
+
+    const candidates: RecommendationCandidate[] = rows.map((row) => ({
+      trackId: String(row['trackId']),
+      algorithm: 'custom',
+      reason: typeof row['reason'] === 'string' ? row['reason'] : 'Sugerida pelo seu algoritmo',
+    }));
     const tracks = await this.tracks.findByIds([...new Set(candidates.map((c) => c.trackId))]);
     return { candidates, tracks };
   }

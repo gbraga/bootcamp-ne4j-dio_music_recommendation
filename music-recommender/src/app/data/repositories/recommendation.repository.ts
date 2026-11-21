@@ -44,4 +44,9 @@ export class RecommendationRepository {
   findFromLikedGenres(userId: string): Promise<LikedGenresRow[]> {
     return this.db.read<LikedGenresRow>(Queries.recommendLikedGenres, { userId });
   }
+
+  /** Runs user-written Cypher. Reads go through a READ transaction, so writes are rejected by Neo4j. */
+  runCustom(cypher: string, userId: string): Promise<Record<string, unknown>[]> {
+    return this.db.read<Record<string, unknown>>(cypher, { userId });
+  }
 }

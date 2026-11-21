@@ -86,57 +86,6 @@ h3 {
   text-align: center;
 }
 
-/* Sits above .hit-area so it can be toggled independently. */
-.switch {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  cursor: pointer;
-
-  input {
-    position: absolute;
-    opacity: 0;
-    inset: 0;
-    margin: 0;
-    cursor: pointer;
-  }
-
-  .track {
-    position: relative;
-    width: 36px;
-    height: 20px;
-    border-radius: 999px;
-    background: var(--border);
-    transition: background 0.2s ease;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: #fff;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.2s ease;
-    }
-  }
-
-  input:checked + .track {
-    background: var(--algo);
-
-    &::after {
-      transform: translateX(16px);
-    }
-  }
-
-  input:focus-visible + .track {
-    outline: 3px solid var(--algo-soft);
-    outline-offset: 2px;
-  }
-}
-
 .description {
   margin: 0;
   color: var(--text-muted);

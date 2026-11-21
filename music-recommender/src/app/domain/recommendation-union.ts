@@ -12,8 +12,9 @@ export function unionRecommendations(
   const merged = new Map<string, Recommendation>();
 
   for (const { trackId, algorithm, reason } of pool.candidates) {
-    if (!enabled.has(algorithm)) continue;
-    const entry = merged.get(trackId) ?? { track: tracksById.get(trackId)!, algorithms: [], reasons: [] };
+    const track = tracksById.get(trackId);
+    if (!enabled.has(algorithm) || !track) continue;
+    const entry = merged.get(trackId) ?? { track, algorithms: [], reasons: [] };
     entry.algorithms.push(algorithm);
     entry.reasons.push(reason);
     merged.set(trackId, entry);

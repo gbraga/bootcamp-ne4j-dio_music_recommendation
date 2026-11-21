@@ -30,8 +30,24 @@ export const RECOMMENDATION_ALGORITHMS: readonly RecommendationAlgorithm[] = [
   },
 ];
 
-export const ALL_ALGORITHM_IDS: readonly AlgorithmId[] = RECOMMENDATION_ALGORITHMS.map(({ id }) => id);
+/** User-written algorithm. Its Cypher starts with this example and can be edited in the UI. */
+export const CUSTOM_ALGORITHM: RecommendationAlgorithm = {
+  id: 'custom',
+  title: 'Seu algoritmo',
+  description: 'Escreva a sua consulta Cypher. Ela recebe $userId e deve retornar trackId (reason é opcional).',
+  cypher: Queries.customExample,
+};
+
+/** Maximum number of rows taken from a custom query. */
+export const CUSTOM_RESULT_LIMIT = 25;
+
+export const ALL_ALGORITHM_IDS: readonly AlgorithmId[] = [
+  CUSTOM_ALGORITHM.id,
+  ...RECOMMENDATION_ALGORITHMS.map(({ id }) => id),
+];
 
 export function algorithmById(id: AlgorithmId): RecommendationAlgorithm {
-  return RECOMMENDATION_ALGORITHMS.find((algorithm) => algorithm.id === id)!;
+  return id === CUSTOM_ALGORITHM.id
+    ? CUSTOM_ALGORITHM
+    : RECOMMENDATION_ALGORITHMS.find((algorithm) => algorithm.id === id)!;
 }

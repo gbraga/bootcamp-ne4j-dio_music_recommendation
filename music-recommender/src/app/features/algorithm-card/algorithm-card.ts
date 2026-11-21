@@ -19,6 +19,6 @@ export class AlgorithmCard {
 
   /** The card already shows the description, so the leading comment is omitted. */
   protected readonly cypherHtml = computed(() =>
-    highlightCypher(this.algorithm().cypher.replace(/^(\s*\/\/.*\n)+/, '')),
+    highlightCypher(this.algorithm().cypher.replace(/^(\s*\/\/.*\n)+/, '').trim()),
   );
 }

@@ -80,3 +80,14 @@ Músicas que o usuário já ouviu são sempre excluídas; músicas sugeridas por
 | Gêneros que você curte | [`recommend-liked-genres.cypher`](src/app/data/queries/recommend-liked-genres.cypher) | Músicas dos 3 gêneros com mais likes do usuário (top 5).      |
 
 Clicar em um card de algoritmo destaca, no painel de recomendações, as músicas que vieram dele.
+
+### Seu algoritmo (card custom)
+
+O primeiro card permite escrever e executar o seu próprio algoritmo em Cypher (**Executar** ou `Ctrl+Enter`).
+Ele participa da união como os demais (pode ser ligado/desligado e destacado).
+
+- Recebe o parâmetro `$userId`; deve retornar a coluna **`trackId`** e, opcionalmente, **`reason`** (texto exibido na recomendação).
+- Roda em **transação de leitura**: comandos de escrita (`CREATE`, `SET`, `DELETE`…) são rejeitados pelo próprio Neo4j.
+- Erros de sintaxe ou de contrato aparecem no card sem afetar os outros algoritmos; no máximo 25 linhas são usadas.
+- A última consulta executada fica salva no navegador (`localStorage`); **Restaurar exemplo** volta para
+  [`custom-example.cypher`](src/app/data/queries/custom-example.cypher).

@@ -26,6 +26,11 @@
 }
 
 /* One colour per recommendation algorithm, shared by cards, badges and highlights. */
+[data-algorithm='custom'] {
+  --algo: #2563eb;
+  --algo-soft: rgb(37 99 235 / 0.12);
+}
+
 [data-algorithm='same-age'] {
   --algo: #7c3aed;
   --algo-soft: rgb(124 58 237 / 0.12);
@@ -63,6 +68,57 @@ body {
 .container {
   width: min(1200px, 100% - 2.5rem);
   margin-inline: auto;
+}
+
+/* Toggle switch shared by the algorithm cards (coloured with the card's --algo). */
+.switch {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .track {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    border-radius: 999px;
+    background: var(--border);
+    transition: background 0.2s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease;
+    }
+  }
+
+  input:checked + .track {
+    background: var(--algo);
+
+    &::after {
+      transform: translateX(16px);
+    }
+  }
+
+  input:focus-visible + .track {
+    outline: 3px solid var(--algo-soft);
+    outline-offset: 2px;
+  }
 }
 
 /* Cypher syntax highlighting (generated via innerHTML, so it must be global). */

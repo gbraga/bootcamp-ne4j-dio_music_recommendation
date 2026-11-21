@@ -22,7 +22,7 @@ export interface ListenedTrack {
   listenDate: string;
 }
 
-export type AlgorithmId = 'same-age' | 'from-artists' | 'top-tracks' | 'liked-genres';
+export type AlgorithmId = 'custom' | 'same-age' | 'from-artists' | 'top-tracks' | 'liked-genres';
 
 export interface RecommendationAlgorithm {
   id: AlgorithmId;

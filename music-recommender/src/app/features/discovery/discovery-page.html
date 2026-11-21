@@ -21,9 +21,23 @@
   <section aria-labelledby="algorithms-title">
     <div class="section-head">
       <h2 id="algorithms-title">Como recomendamos</h2>
-      <p>As recomendações são a união dos algoritmos ativos. Use o interruptor para ligar ou desligar cada um e clique no card para destacar suas músicas.</p>
+      <p>As recomendações são a união dos algoritmos ativos. Escreva o seu próprio em Cypher, ligue ou desligue cada um e clique em um card para destacar suas músicas.</p>
     </div>
     <div class="algorithms">
+      <app-custom-algorithm-card
+        class="custom"
+        [algorithm]="customAlgorithm"
+        [cypher]="store.customCypher()"
+        [count]="store.selectedUserId() && store.customResult.hasValue() ? store.countByAlgorithm().custom : null"
+        [enabled]="store.enabledAlgorithms().has(customAlgorithm.id)"
+        [highlighted]="store.highlightedAlgorithm() === customAlgorithm.id"
+        [running]="store.customResult.isLoading()"
+        [error]="store.customError()"
+        (run)="store.runCustom($event)"
+        (reset)="store.resetCustom()"
+        (enabledChange)="store.setAlgorithmEnabled(customAlgorithm.id, $event)"
+        (highlightToggled)="store.toggleHighlight(customAlgorithm.id)"
+      />
       @for (algorithm of algorithms; track algorithm.id) {
         <app-algorithm-card
           [algorithm]="algorithm"

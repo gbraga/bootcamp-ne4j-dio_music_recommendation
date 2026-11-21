@@ -25,11 +25,15 @@ Projeto do bootcamp **Neo4j (DIO)**: uma rede de streaming de música modelada c
 
 ## 🕸️ Modelo do grafo
 
+![alt text](image.png)
+
 ```
 (:User)-[:LISTENED_TO {timesListened, liked, listenDate}]->(:Track)
-(:Artist)-[:PRODUCES]->(:Track)          (:Artist)-[:FEATURED_IN]->(:Track)
+(:Artist)-[:PRODUCES]->(:Track)          
+(:Artist)-[:FEATURED_IN]->(:Track)
 (:Track)-[:BELONGS_TO]->(:Genre)
-(:User)-[:BORN_IN]->(:Nationality)       (:Artist)-[:BORN_IN]->(:Nationality)
+(:User)-[:BORN_IN]->(:Nationality)       
+(:Artist)-[:BORN_IN]->(:Nationality)
 ```
 
 Os dados ficam em [`resources/datasets`](resources/datasets): 25 ouvintes, 25 artistas reais, 35 músicas

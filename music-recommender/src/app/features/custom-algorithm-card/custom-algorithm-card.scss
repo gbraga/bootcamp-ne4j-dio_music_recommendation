@@ -5,9 +5,8 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
   height: 100%;
-  padding: 1.25rem;
+  padding: 1rem 1.25rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-top: 4px solid var(--algo);
@@ -28,12 +27,71 @@
       opacity: 0.6;
     }
   }
+
+  &.collapsed {
+    .collapsible {
+      grid-template-rows: 0fr;
+    }
+
+    .chevron {
+      transform: rotate(-90deg);
+    }
+  }
 }
 
 header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.toggle {
+  display: flex;
+  flex: 1;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.25rem;
+  margin: -0.25rem;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 3px solid var(--algo-soft);
+  }
+}
+
+.chevron {
+  width: 18px;
+  margin-left: auto;
+  fill: none;
+  stroke: var(--text-muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.25s ease;
+}
+
+.collapsible {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 0;
+  overflow: hidden;
+
+  > :first-child {
+    margin-top: 0.75rem;
+  }
 }
 
 h3 {
@@ -50,7 +108,6 @@ h3 {
 }
 
 .badge {
-  margin-right: auto;
   padding: 0.0625rem 0.5rem;
   border-radius: 999px;
   background: var(--algo-soft);

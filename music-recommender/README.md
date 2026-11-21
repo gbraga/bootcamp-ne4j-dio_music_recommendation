@@ -49,7 +49,7 @@ src/app
 │   ├── repositories/    Executam as consultas e devolvem linhas tipadas
 │   └── seed/            Plano de importação dos CSVs e importação automática de banco vazio
 ├── domain/              Modelos, definição dos algoritmos e regras (união das recomendações)
-├── features/            Componentes de UI (página, cards de algoritmo, música e seletor de usuário)
+├── features/            Componentes de UI (página, cards de algoritmo, sidebar de músicas e seletor de usuário)
 └── shared/              Utilitários de apresentação (realce de Cypher, duração, bandeiras)
 ```
 

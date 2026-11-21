@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, computed, input, linkedSignal, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, linkedSignal, output, signal } from '@angular/core';
 import { RecommendationAlgorithm } from '../../domain/models';
 import { highlightCypher } from '../../shared/cypher-highlight';
+
+const EXPANDED_KEY = 'graph-music.custom-expanded';
 
 @Component({
   selector: 'app-custom-algorithm-card',
@@ -26,9 +28,16 @@ export class CustomAlgorithmCard {
 
   protected readonly draft = linkedSignal(() => this.cypher());
   protected readonly isDirty = computed(() => this.draft() !== this.cypher());
+  /** Accordion state, remembered between visits. */
+  protected readonly expanded = signal(localStorage.getItem(EXPANDED_KEY) !== 'false');
 
   /** A trailing space keeps the highlighted layer as tall as the textarea after a final newline. */
   protected readonly draftHtml = computed(() => highlightCypher(this.draft()) + ' ');
+
+  protected toggleExpanded(): void {
+    this.expanded.update((expanded) => !expanded);
+    localStorage.setItem(EXPANDED_KEY, String(this.expanded()));
+  }
 
   protected execute(): void {
     if (this.draft().trim()) this.run.emit(this.draft());

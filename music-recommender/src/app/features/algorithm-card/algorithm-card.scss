@@ -8,7 +8,7 @@
   flex-direction: column;
   gap: 0.75rem;
   height: 100%;
-  padding: 1.25rem;
+  padding: 1rem;
   background: var(--surface);
   border: 1px solid var(--border);
   border-top: 4px solid var(--algo);
@@ -63,7 +63,8 @@ header {
 h3 {
   flex: 1;
   margin: 0;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
+  line-height: 1.25;
   font-weight: 650;
 }
 
@@ -89,19 +90,19 @@ h3 {
 .description {
   margin: 0;
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .cypher {
   flex: 1;
   margin: 0;
-  padding: 0.875rem 1rem;
+  padding: 0.75rem;
   white-space: pre-wrap;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   border-radius: var(--radius-md);
   background: var(--code-bg);
   color: var(--code-text);
-  font: 0.75rem/1.6 var(--font-mono);
+  font: 0.7rem/1.55 var(--font-mono);
 }
 
 .hint {

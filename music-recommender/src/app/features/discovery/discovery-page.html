@@ -17,12 +17,13 @@
   </div>
 </header>
 
-<main class="container">
-  <section aria-labelledby="algorithms-title">
-    <div class="section-head">
-      <h2 id="algorithms-title">Como recomendamos</h2>
-      <p>As recomendações são a união dos algoritmos ativos. Escreva o seu próprio em Cypher, ligue ou desligue cada um e clique em um card para destacar suas músicas.</p>
-    </div>
+<div class="container layout">
+  <div class="section-head">
+    <h2 id="algorithms-title">Como recomendamos</h2>
+    <p>As recomendações são a união dos algoritmos ativos. Escreva o seu próprio em Cypher, ligue ou desligue cada um e clique em um card para destacar suas músicas.</p>
+  </div>
+
+  <main aria-labelledby="algorithms-title">
     <div class="algorithms">
       <app-custom-algorithm-card
         class="custom"
@@ -49,92 +50,7 @@
         />
       }
     </div>
-  </section>
+  </main>
 
-  @if (store.users.isLoading()) {
-    <section class="empty">
-      <span aria-hidden="true">⏳</span>
-      <h2>Preparando o grafo</h2>
-      <p>{{ store.loadingMessage() }}</p>
-    </section>
-  } @else if (!store.selectedUserId()) {
-    <section class="empty">
-      <span aria-hidden="true">🎧</span>
-      <h2>Escolha um ouvinte</h2>
-      <p>Selecione um usuário acima para ver o histórico e as recomendações dele.</p>
-    </section>
-  } @else {
-    <div class="panels">
-      <section class="panel" aria-labelledby="history-title">
-        <div class="panel-head">
-          <h2 id="history-title">Já ouviu</h2>
-          @if (store.history.hasValue()) {
-            <span class="pill">{{ store.history.value().length }}</span>
-          }
-        </div>
-
-        @if (store.history.isLoading()) {
-          <div class="skeletons">@for (i of [1, 2, 3]; track i) {<div class="skeleton"></div>}</div>
-        } @else if (store.history.error()) {
-          <p class="alert">Erro ao carregar o histórico.</p>
-        } @else {
-          <div class="list">
-            @for (item of store.history.value(); track item.track.trackId) {
-              <app-track-card [track]="item.track">
-                <p class="stats">
-                  <span>▶ {{ item.timesListened }} {{ item.timesListened === 1 ? 'play' : 'plays' }}</span>
-                  <span>desde {{ item.listenDate | date: 'MMM/yyyy' }}</span>
-                </p>
-                <span trackAside class="like" [class.liked]="item.liked" [attr.aria-label]="item.liked ? 'Curtiu' : 'Não curtiu'">
-                  {{ item.liked ? '♥' : '♡' }}
-                </span>
-              </app-track-card>
-            } @empty {
-              <p class="muted">Este usuário ainda não ouviu nenhuma música.</p>
-            }
-          </div>
-        }
-      </section>
-
-      <section class="panel" aria-labelledby="recommendations-title" [attr.data-algorithm]="store.highlightedAlgorithm()">
-        <div class="panel-head">
-          <h2 id="recommendations-title">Recomendadas para você</h2>
-          @if (store.candidates.hasValue()) {
-            <span class="pill">{{ store.recommendations().length }}</span>
-          }
-          @if (store.highlightedAlgorithm(); as highlighted) {
-            <button type="button" class="clear" (click)="store.toggleHighlight(highlighted)">
-              Destaque: {{ algorithmTitle(highlighted) }} ✕
-            </button>
-          }
-        </div>
-
-        @if (store.candidates.isLoading()) {
-          <div class="skeletons">@for (i of [1, 2, 3, 4]; track i) {<div class="skeleton"></div>}</div>
-        } @else if (store.candidates.error()) {
-          <p class="alert">Erro ao gerar recomendações.</p>
-        } @else {
-          <div class="list">
-            @for (recommendation of store.recommendations(); track recommendation.track.trackId) {
-              <app-track-card [track]="recommendation.track" [state]="stateOf(recommendation)">
-                <ul class="reasons">
-                  @for (algorithm of recommendation.algorithms; track algorithm; let i = $index) {
-                    <li [attr.data-algorithm]="algorithm" [title]="algorithmTitle(algorithm)">
-                      {{ recommendation.reasons[i] }}
-                    </li>
-                  }
-                </ul>
-              </app-track-card>
-            } @empty {
-              @if (store.enabledAlgorithms().size === 0) {
-                <p class="muted">Todos os algoritmos estão desativados. Ative ao menos um para ver recomendações.</p>
-              } @else {
-                <p class="muted">Nenhuma recomendação nova com os algoritmos ativos.</p>
-              }
-            }
-          </div>
-        }
-      </section>
-    </div>
-  }
-</main>
+  <app-music-sidebar class="sidebar" />
+</div>

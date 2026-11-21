@@ -1,8 +1,18 @@
-<article class="card" [class.highlighted]="highlighted()" [class.disabled]="!enabled()">
+<article class="card" [class.highlighted]="highlighted()" [class.disabled]="!enabled()" [class.collapsed]="!expanded()">
   <header>
-    <span class="dot" aria-hidden="true"></span>
-    <h3>{{ algorithm().title }}</h3>
-    <span class="badge">Custom</span>
+    <button
+      type="button"
+      class="toggle"
+      aria-controls="custom-algorithm-body"
+      [attr.aria-expanded]="expanded()"
+      [title]="expanded() ? 'Recolher' : 'Expandir'"
+      (click)="toggleExpanded()"
+    >
+      <span class="dot" aria-hidden="true"></span>
+      <h3>{{ algorithm().title }}</h3>
+      <span class="badge">Custom</span>
+      <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+    </button>
     @if (enabled() && count() !== null && !error()) {
       <span class="count">{{ count() }}</span>
     }
@@ -18,51 +28,56 @@
     </label>
   </header>
 
-  <p class="description">{{ algorithm().description }}</p>
+  <!-- Animates height via grid rows; `inert` keeps hidden controls out of the tab order. -->
+  <div class="collapsible" id="custom-algorithm-body" [inert]="!expanded()">
+    <div class="body">
+      <p class="description">{{ algorithm().description }}</p>
 
-  <div class="editor">
-    <pre aria-hidden="true"><code [innerHTML]="draftHtml()"></code></pre>
-    <textarea
-      spellcheck="false"
-      autocapitalize="off"
-      autocomplete="off"
-      aria-label="Consulta Cypher do seu algoritmo"
-      [value]="draft()"
-      (input)="draft.set($any($event.target).value)"
-      (keydown)="onKeydown($event)"
-    ></textarea>
+      <div class="editor">
+        <pre aria-hidden="true"><code [innerHTML]="draftHtml()"></code></pre>
+        <textarea
+          spellcheck="false"
+          autocapitalize="off"
+          autocomplete="off"
+          aria-label="Consulta Cypher do seu algoritmo"
+          [value]="draft()"
+          (input)="draft.set($any($event.target).value)"
+          (keydown)="onKeydown($event)"
+        ></textarea>
+      </div>
+
+      @if (error()) {
+        <p class="error" role="alert">{{ error() }}</p>
+      }
+
+      <footer>
+        <button type="button" class="primary" [disabled]="running()" (click)="execute()">
+          @if (running()) {
+            <span class="spinner" aria-hidden="true"></span> Executando…
+          } @else {
+            ▶ Executar
+          }
+        </button>
+        <button type="button" class="ghost" (click)="restoreExample()">Restaurar exemplo</button>
+        <button
+          type="button"
+          class="ghost"
+          [disabled]="!enabled() || !!error()"
+          [attr.aria-pressed]="highlighted()"
+          (click)="highlightToggled.emit()"
+        >
+          {{ highlighted() ? 'Limpar destaque' : 'Destacar' }}
+        </button>
+        <span class="hint">
+          @if (!enabled()) {
+            Desativado · fora da lista de recomendações
+          } @else if (isDirty()) {
+            Alterações não executadas · Ctrl+Enter
+          } @else {
+            Somente leitura · Ctrl+Enter executa
+          }
+        </span>
+      </footer>
+    </div>
   </div>
-
-  @if (error()) {
-    <p class="error" role="alert">{{ error() }}</p>
-  }
-
-  <footer>
-    <button type="button" class="primary" [disabled]="running()" (click)="execute()">
-      @if (running()) {
-        <span class="spinner" aria-hidden="true"></span> Executando…
-      } @else {
-        ▶ Executar
-      }
-    </button>
-    <button type="button" class="ghost" (click)="restoreExample()">Restaurar exemplo</button>
-    <button
-      type="button"
-      class="ghost"
-      [disabled]="!enabled() || !!error()"
-      [attr.aria-pressed]="highlighted()"
-      (click)="highlightToggled.emit()"
-    >
-      {{ highlighted() ? 'Limpar destaque' : 'Destacar' }}
-    </button>
-    <span class="hint">
-      @if (!enabled()) {
-        Desativado · fora da lista de recomendações
-      } @else if (isDirty()) {
-        Alterações não executadas · Ctrl+Enter
-      } @else {
-        Somente leitura · Ctrl+Enter executa
-      }
-    </span>
-  </footer>
 </article>

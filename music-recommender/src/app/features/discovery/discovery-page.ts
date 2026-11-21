@@ -21,8 +21,8 @@ export class DiscoveryPage {
   protected readonly algorithmTitle = (id: AlgorithmId) => algorithmById(id).title;
 
   protected stateOf(recommendation: Recommendation): TrackCardState {
-    const active = this.store.activeAlgorithm();
-    if (!active) return 'default';
-    return recommendation.algorithms.includes(active) ? 'highlighted' : 'dimmed';
+    const highlighted = this.store.highlightedAlgorithm();
+    if (!highlighted) return 'default';
+    return recommendation.algorithms.includes(highlighted) ? 'highlighted' : 'dimmed';
   }
 }

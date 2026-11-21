@@ -67,13 +67,16 @@ O fluxo é sempre `features → domain → data → core`. As consultas ficam is
 
 ## Algoritmos de recomendação
 
-As recomendações são a **união** de três consultas, executadas em paralelo. Músicas que o usuário
-já ouviu são sempre excluídas; músicas sugeridas por mais de um algoritmo aparecem primeiro.
+As recomendações são a **união** dos algoritmos **ativos**. Todas as consultas rodam em paralelo uma
+vez por usuário; o interruptor de cada card liga/desliga o algoritmo e a lista é recalculada na hora
+(sem nova consulta), em [`domain/recommendation-union.ts`](src/app/domain/recommendation-union.ts).
+Músicas que o usuário já ouviu são sempre excluídas; músicas sugeridas por mais de um algoritmo aparecem primeiro.
 
-| Algoritmo           | Consulta                                                                       | Regra                                                         |
-| ------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------- |
-| Da sua geração      | [`recommend-same-age.cypher`](src/app/data/queries/recommend-same-age.cypher)       | Ouvidas por usuários com até ±5 anos de diferença (top 5).    |
-| Dos seus artistas   | [`recommend-from-artists.cypher`](src/app/data/queries/recommend-from-artists.cypher) | Outras músicas e parcerias dos artistas que o usuário ouve.   |
-| Top 3 da plataforma | [`recommend-top-tracks.cypher`](src/app/data/queries/recommend-top-tracks.cypher)   | As 3 mais tocadas (soma de `timesListened`) ainda não ouvidas. |
+| Algoritmo              | Consulta                                                                       | Regra                                                         |
+| ---------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------- |
+| Da sua geração         | [`recommend-same-age.cypher`](src/app/data/queries/recommend-same-age.cypher)       | Ouvidas por usuários com até ±5 anos de diferença (top 5).    |
+| Dos seus artistas      | [`recommend-from-artists.cypher`](src/app/data/queries/recommend-from-artists.cypher) | Outras músicas e parcerias dos artistas que o usuário ouve.   |
+| Top 3 da plataforma    | [`recommend-top-tracks.cypher`](src/app/data/queries/recommend-top-tracks.cypher)   | As 3 mais tocadas (soma de `timesListened`) ainda não ouvidas. |
+| Gêneros que você curte | [`recommend-liked-genres.cypher`](src/app/data/queries/recommend-liked-genres.cypher) | Músicas dos 3 gêneros com mais likes do usuário (top 5).      |
 
 Clicar em um card de algoritmo destaca, no painel de recomendações, as músicas que vieram dele.

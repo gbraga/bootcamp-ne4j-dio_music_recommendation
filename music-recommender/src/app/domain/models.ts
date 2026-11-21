@@ -22,7 +22,7 @@ export interface ListenedTrack {
   listenDate: string;
 }
 
-export type AlgorithmId = 'same-age' | 'from-artists' | 'top-tracks';
+export type AlgorithmId = 'same-age' | 'from-artists' | 'top-tracks' | 'liked-genres';
 
 export interface RecommendationAlgorithm {
   id: AlgorithmId;
@@ -36,6 +36,12 @@ export interface RecommendationCandidate {
   trackId: string;
   algorithm: AlgorithmId;
   reason: string;
+}
+
+/** Everything every algorithm suggested for a user, plus the details of those tracks. */
+export interface CandidatePool {
+  candidates: RecommendationCandidate[];
+  tracks: Track[];
 }
 
 /** A track after the union of all algorithms. */

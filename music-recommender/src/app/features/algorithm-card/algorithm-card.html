@@ -1,18 +1,40 @@
-<button
-  type="button"
-  class="card"
-  [class.active]="active()"
-  [attr.aria-pressed]="active()"
-  (click)="toggled.emit()"
->
+<article class="card" [class.highlighted]="highlighted()" [class.disabled]="!enabled()">
+  <!-- Covers the whole card so clicking anywhere toggles the highlight. -->
+  <button
+    type="button"
+    class="hit-area"
+    [disabled]="!enabled()"
+    [attr.aria-pressed]="highlighted()"
+    [attr.aria-label]="'Destacar recomendações de ' + algorithm().title"
+    (click)="highlightToggled.emit()"
+  ></button>
+
   <header>
     <span class="dot" aria-hidden="true"></span>
     <h3>{{ algorithm().title }}</h3>
-    @if (count() !== null) {
+    @if (enabled() && count() !== null) {
       <span class="count">{{ count() }}</span>
     }
+    <label class="switch" [title]="enabled() ? 'Desativar algoritmo' : 'Ativar algoritmo'">
+      <input
+        type="checkbox"
+        role="switch"
+        [checked]="enabled()"
+        [attr.aria-label]="'Usar o algoritmo ' + algorithm().title"
+        (change)="enabledChange.emit($any($event.target).checked)"
+      />
+      <span class="track" aria-hidden="true"></span>
+    </label>
   </header>
   <p class="description">{{ algorithm().description }}</p>
   <pre class="cypher"><code [innerHTML]="cypherHtml()"></code></pre>
-  <span class="hint">{{ active() ? 'Destacando recomendações · clique para limpar' : 'Clique para destacar as recomendações' }}</span>
-</button>
+  <span class="hint">
+    @if (!enabled()) {
+      Desativado · fora da lista de recomendações
+    } @else if (highlighted()) {
+      Destacando recomendações · clique para limpar
+    } @else {
+      Clique para destacar as recomendações
+    }
+  </span>
+</article>

@@ -3,36 +3,54 @@
 }
 
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  width: 100%;
   height: 100%;
   padding: 1.25rem;
-  text-align: left;
-  font: inherit;
-  color: inherit;
   background: var(--surface);
   border: 1px solid var(--border);
   border-top: 4px solid var(--algo);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, opacity 0.2s ease;
 
-  &:hover {
+  &:not(.disabled):hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
+  }
+
+  &.highlighted {
+    background: linear-gradient(180deg, var(--algo-soft), var(--surface) 55%);
+    box-shadow: 0 0 0 2px var(--algo), var(--shadow-md);
+  }
+
+  &.disabled {
+    border-top-color: var(--border);
+    opacity: 0.6;
+
+    .dot {
+      background: var(--text-subtle);
+    }
+  }
+}
+
+.hit-area {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: default;
   }
 
   &:focus-visible {
     outline: 3px solid var(--algo-soft);
     outline-offset: 2px;
-  }
-
-  &.active {
-    background: linear-gradient(180deg, var(--algo-soft), var(--surface) 55%);
-    box-shadow: 0 0 0 2px var(--algo), var(--shadow-md);
   }
 }
 
@@ -50,6 +68,7 @@ h3 {
 }
 
 .dot {
+  flex: none;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -65,6 +84,57 @@ h3 {
   font-size: 0.8rem;
   font-weight: 600;
   text-align: center;
+}
+
+/* Sits above .hit-area so it can be toggled independently. */
+.switch {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  cursor: pointer;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .track {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    border-radius: 999px;
+    background: var(--border);
+    transition: background 0.2s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease;
+    }
+  }
+
+  input:checked + .track {
+    background: var(--algo);
+
+    &::after {
+      transform: translateX(16px);
+    }
+  }
+
+  input:focus-visible + .track {
+    outline: 3px solid var(--algo-soft);
+    outline-offset: 2px;
+  }
 }
 
 .description {

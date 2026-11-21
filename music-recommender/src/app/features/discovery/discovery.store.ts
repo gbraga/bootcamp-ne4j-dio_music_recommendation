@@ -2,6 +2,8 @@ import { Injectable, computed, inject, linkedSignal, resource, signal } from '@a
 import { DatabaseSeeder } from '../../data/seed/database-seeder';
 import { ListeningService } from '../../domain/listening.service';
 import { AlgorithmId } from '../../domain/models';
+import { ALL_ALGORITHM_IDS } from '../../domain/recommendation-algorithms';
+import { unionRecommendations } from '../../domain/recommendation-union';
 import { RecommendationService } from '../../domain/recommendation.service';
 
 /** UI state for the discovery page. Components read signals and call actions. */
@@ -12,7 +14,11 @@ export class DiscoveryStore {
   private readonly recommender = inject(RecommendationService);
 
   readonly databaseStatus = this.database.status;
-  readonly activeAlgorithm = signal<AlgorithmId | null>(null);
+
+  /** Algorithms that take part in the union (changes the recommendation list). */
+  readonly enabledAlgorithms = signal<ReadonlySet<AlgorithmId>>(new Set(ALL_ALGORITHM_IDS));
+  /** Algorithm whose tracks are visually highlighted (does not change the list). */
+  readonly highlightedAlgorithm = signal<AlgorithmId | null>(null);
 
   /** Imports the datasets on first use of an empty AuraDB, then loads the users. */
   readonly users = resource({
@@ -30,10 +36,14 @@ export class DiscoveryStore {
     loader: ({ params: userId }) => this.listening.getHistory(userId),
   });
 
-  readonly recommendations = resource({
+  readonly candidates = resource({
     params: () => this.selectedUserId(),
-    loader: ({ params: userId }) => this.recommender.recommendFor(userId),
+    loader: ({ params: userId }) => this.recommender.findCandidates(userId),
   });
+
+  readonly recommendations = computed(() =>
+    this.candidates.hasValue() ? unionRecommendations(this.candidates.value(), this.enabledAlgorithms()) : [],
+  );
 
   readonly selectedUser = computed(() =>
     this.users.value()?.find((user) => user.userId === this.selectedUserId()),
@@ -46,20 +56,29 @@ export class DiscoveryStore {
       : 'Conectando ao Neo4j AuraDB…';
   });
 
+  /** How many tracks each algorithm suggests for the selected user. */
   readonly countByAlgorithm = computed(() => {
-    const counts: Record<AlgorithmId, number> = { 'same-age': 0, 'from-artists': 0, 'top-tracks': 0 };
-    for (const recommendation of this.recommendations.value() ?? []) {
-      recommendation.algorithms.forEach((id) => counts[id]++);
-    }
+    const counts = Object.fromEntries(ALL_ALGORITHM_IDS.map((id) => [id, 0])) as Record<AlgorithmId, number>;
+    for (const { algorithm } of this.candidates.value()?.candidates ?? []) counts[algorithm]++;
     return counts;
   });
 
   selectUser(userId: string): void {
-    this.activeAlgorithm.set(null);
+    this.highlightedAlgorithm.set(null);
     this.selectedUserId.set(userId || undefined);
   }
 
-  toggleAlgorithm(id: AlgorithmId): void {
-    this.activeAlgorithm.update((current) => (current === id ? null : id));
+  toggleHighlight(id: AlgorithmId): void {
+    this.highlightedAlgorithm.update((current) => (current === id ? null : id));
+  }
+
+  setAlgorithmEnabled(id: AlgorithmId, enabled: boolean): void {
+    this.enabledAlgorithms.update((current) => {
+      const next = new Set(current);
+      if (enabled) next.add(id);
+      else next.delete(id);
+      return next;
+    });
+    if (!enabled && this.highlightedAlgorithm() === id) this.highlightedAlgorithm.set(null);
   }
 }

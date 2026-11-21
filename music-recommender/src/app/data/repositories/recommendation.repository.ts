@@ -19,6 +19,12 @@ export interface TopTrackRow {
   plays: number;
 }
 
+export interface LikedGenresRow {
+  trackId: string;
+  likedGenres: string[];
+  score: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class RecommendationRepository {
   private readonly db = inject(Neo4jClient);
@@ -33,5 +39,9 @@ export class RecommendationRepository {
 
   findTopTracks(userId: string): Promise<TopTrackRow[]> {
     return this.db.read<TopTrackRow>(Queries.recommendTopTracks, { userId });
+  }
+
+  findFromLikedGenres(userId: string): Promise<LikedGenresRow[]> {
+    return this.db.read<LikedGenresRow>(Queries.recommendLikedGenres, { userId });
   }
 }

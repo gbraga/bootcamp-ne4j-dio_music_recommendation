@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { RecommendationRepository } from '../data/repositories/recommendation.repository';
 import { TrackRepository } from '../data/repositories/track.repository';
-import { Recommendation, RecommendationCandidate } from './models';
+import { CandidatePool, RecommendationCandidate } from './models';
 import { SAME_AGE_RANGE } from './recommendation-algorithms';
 
 const plural = (count: number, singular: string, pluralForm: string) =>
@@ -12,17 +12,22 @@ export class RecommendationService {
   private readonly recommendations = inject(RecommendationRepository);
   private readonly tracks = inject(TrackRepository);
 
-  /** Runs the three algorithms in parallel and returns their union. */
-  async recommendFor(userId: string): Promise<Recommendation[]> {
+  /**
+   * Runs every algorithm in parallel. Enabling/disabling algorithms is applied later
+   * by `unionRecommendations`, so toggling does not hit the database again.
+   */
+  async findCandidates(userId: string): Promise<CandidatePool> {
     const candidates = (
       await Promise.all([
         this.sameAge(userId),
         this.fromListenedArtists(userId),
         this.topTracks(userId),
+        this.likedGenres(userId),
       ])
     ).flat();
 
-    return this.union(candidates);
+    const tracks = await this.tracks.findByIds([...new Set(candidates.map((c) => c.trackId))]);
+    return { candidates, tracks };
   }
 
   private async sameAge(userId: string): Promise<RecommendationCandidate[]> {
@@ -52,21 +57,12 @@ export class RecommendationService {
     }));
   }
 
-  /** Merges candidates by track; tracks suggested by more algorithms come first. */
-  private async union(candidates: RecommendationCandidate[]): Promise<Recommendation[]> {
-    const merged = new Map<string, Omit<Recommendation, 'track'>>();
-    for (const { trackId, algorithm, reason } of candidates) {
-      const entry = merged.get(trackId) ?? { algorithms: [], reasons: [] };
-      entry.algorithms.push(algorithm);
-      entry.reasons.push(reason);
-      merged.set(trackId, entry);
-    }
-
-    const details = await this.tracks.findByIds([...merged.keys()]);
-    const byId = new Map(details.map((track) => [track.trackId, track]));
-
-    return [...merged.entries()]
-      .map(([trackId, entry]) => ({ track: byId.get(trackId)!, ...entry }))
-      .sort((a, b) => b.algorithms.length - a.algorithms.length);
+  private async likedGenres(userId: string): Promise<RecommendationCandidate[]> {
+    const rows = await this.recommendations.findFromLikedGenres(userId);
+    return rows.map(({ trackId, likedGenres }) => ({
+      trackId,
+      algorithm: 'liked-genres',
+      reason: `Você curte ${likedGenres.join(' e ')}`,
+    }));
   }
 }

@@ -4,6 +4,7 @@ import trackDetails from './track-details.cypher';
 import recommendSameAge from './recommend-same-age.cypher';
 import recommendFromArtists from './recommend-from-artists.cypher';
 import recommendTopTracks from './recommend-top-tracks.cypher';
+import recommendLikedGenres from './recommend-liked-genres.cypher';
 
 /** Cypher queries live in .cypher files and are bundled as plain text. */
 export const Queries = {
@@ -13,4 +14,5 @@ export const Queries = {
   recommendSameAge,
   recommendFromArtists,
   recommendTopTracks,
+  recommendLikedGenres,
 } as const;

@@ -22,7 +22,15 @@ export const RECOMMENDATION_ALGORITHMS: readonly RecommendationAlgorithm[] = [
     description: 'As três músicas mais tocadas que você ainda não ouviu.',
     cypher: Queries.recommendTopTracks,
   },
+  {
+    id: 'liked-genres',
+    title: 'Gêneros que você curte',
+    description: 'Músicas dos três gêneros que mais receberam o seu like.',
+    cypher: Queries.recommendLikedGenres,
+  },
 ];
+
+export const ALL_ALGORITHM_IDS: readonly AlgorithmId[] = RECOMMENDATION_ALGORITHMS.map(({ id }) => id);
 
 export function algorithmById(id: AlgorithmId): RecommendationAlgorithm {
   return RECOMMENDATION_ALGORITHMS.find((algorithm) => algorithm.id === id)!;

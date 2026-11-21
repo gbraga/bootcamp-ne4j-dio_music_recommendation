@@ -12,8 +12,10 @@ import { highlightCypher } from '../../shared/cypher-highlight';
 export class AlgorithmCard {
   readonly algorithm = input.required<RecommendationAlgorithm>();
   readonly count = input<number | null>(null);
-  readonly active = input(false);
-  readonly toggled = output<void>();
+  readonly enabled = input(true);
+  readonly highlighted = input(false);
+  readonly enabledChange = output<boolean>();
+  readonly highlightToggled = output<void>();
 
   /** The card already shows the description, so the leading comment is omitted. */
   protected readonly cypherHtml = computed(() =>

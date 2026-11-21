@@ -21,15 +21,17 @@
   <section aria-labelledby="algorithms-title">
     <div class="section-head">
       <h2 id="algorithms-title">Como recomendamos</h2>
-      <p>As recomendações são a união destes três algoritmos. Clique em um deles para destacar suas músicas.</p>
+      <p>As recomendações são a união dos algoritmos ativos. Use o interruptor para ligar ou desligar cada um e clique no card para destacar suas músicas.</p>
     </div>
     <div class="algorithms">
       @for (algorithm of algorithms; track algorithm.id) {
         <app-algorithm-card
           [algorithm]="algorithm"
-          [count]="store.selectedUserId() && store.recommendations.hasValue() ? store.countByAlgorithm()[algorithm.id] : null"
-          [active]="store.activeAlgorithm() === algorithm.id"
-          (toggled)="store.toggleAlgorithm(algorithm.id)"
+          [count]="store.selectedUserId() && store.candidates.hasValue() ? store.countByAlgorithm()[algorithm.id] : null"
+          [enabled]="store.enabledAlgorithms().has(algorithm.id)"
+          [highlighted]="store.highlightedAlgorithm() === algorithm.id"
+          (enabledChange)="store.setAlgorithmEnabled(algorithm.id, $event)"
+          (highlightToggled)="store.toggleHighlight(algorithm.id)"
         />
       }
     </div>
@@ -80,26 +82,26 @@
         }
       </section>
 
-      <section class="panel" aria-labelledby="recommendations-title" [attr.data-algorithm]="store.activeAlgorithm()">
+      <section class="panel" aria-labelledby="recommendations-title" [attr.data-algorithm]="store.highlightedAlgorithm()">
         <div class="panel-head">
           <h2 id="recommendations-title">Recomendadas para você</h2>
-          @if (store.recommendations.hasValue()) {
-            <span class="pill">{{ store.recommendations.value().length }}</span>
+          @if (store.candidates.hasValue()) {
+            <span class="pill">{{ store.recommendations().length }}</span>
           }
-          @if (store.activeAlgorithm(); as active) {
-            <button type="button" class="clear" (click)="store.toggleAlgorithm(active)">
-              Filtro: {{ algorithmTitle(active) }} ✕
+          @if (store.highlightedAlgorithm(); as highlighted) {
+            <button type="button" class="clear" (click)="store.toggleHighlight(highlighted)">
+              Destaque: {{ algorithmTitle(highlighted) }} ✕
             </button>
           }
         </div>
 
-        @if (store.recommendations.isLoading()) {
+        @if (store.candidates.isLoading()) {
           <div class="skeletons">@for (i of [1, 2, 3, 4]; track i) {<div class="skeleton"></div>}</div>
-        } @else if (store.recommendations.error()) {
+        } @else if (store.candidates.error()) {
           <p class="alert">Erro ao gerar recomendações.</p>
         } @else {
           <div class="list">
-            @for (recommendation of store.recommendations.value(); track recommendation.track.trackId) {
+            @for (recommendation of store.recommendations(); track recommendation.track.trackId) {
               <app-track-card [track]="recommendation.track" [state]="stateOf(recommendation)">
                 <ul class="reasons">
                   @for (algorithm of recommendation.algorithms; track algorithm; let i = $index) {
@@ -110,7 +112,11 @@
                 </ul>
               </app-track-card>
             } @empty {
-              <p class="muted">Nenhuma recomendação nova para este usuário.</p>
+              @if (store.enabledAlgorithms().size === 0) {
+                <p class="muted">Todos os algoritmos estão desativados. Ative ao menos um para ver recomendações.</p>
+              } @else {
+                <p class="muted">Nenhuma recomendação nova com os algoritmos ativos.</p>
+              }
             }
           </div>
         }

@@ -47,6 +47,9 @@
     </p>
     <p class="meta">
       {{ year() }} · {{ track().duration | duration }}
+      <span class="listens" [title]="track().totalListens + ' plays somando todos os ouvintes'">
+        · ▶ {{ track().totalListens | number }} {{ track().totalListens === 1 ? 'play' : 'plays' }}
+      </span>
       @for (genre of track().genres; track genre) {
         <span class="genre">{{ genre }}</span>
       }

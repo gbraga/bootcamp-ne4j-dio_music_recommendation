@@ -1,3 +1,4 @@
+import { DecimalPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, input, linkedSignal, output } from '@angular/core';
 import { Track } from '../../domain/models';
 import { DurationPipe } from '../../shared/duration.pipe';
@@ -6,7 +7,7 @@ export type TrackCardState = 'default' | 'highlighted' | 'dimmed';
 
 @Component({
   selector: 'app-track-card',
-  imports: [DurationPipe],
+  imports: [DecimalPipe, DurationPipe],
   templateUrl: './track-card.html',
   styleUrl: './track-card.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

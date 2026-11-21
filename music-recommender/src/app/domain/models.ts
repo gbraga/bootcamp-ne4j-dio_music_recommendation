@@ -34,6 +34,8 @@ export interface Track {
   artists: string[];
   featuring: string[];
   genres: string[];
+  /** Sum of timesListened over every user's LISTENED_TO relationship. */
+  totalListens: number;
   artistPhoto: ArtistPhoto | null;
 }
 

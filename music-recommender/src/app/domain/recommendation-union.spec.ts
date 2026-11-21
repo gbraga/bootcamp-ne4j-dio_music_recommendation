@@ -11,6 +11,7 @@ const track = (trackId: string) => ({
   artists: [],
   featuring: [],
   genres: [],
+  totalListens: 0,
   artistPhoto: null,
 });
 

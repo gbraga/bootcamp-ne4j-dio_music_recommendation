@@ -1,4 +1,4 @@
-// Detalhes das faixas: artistas, participações, gêneros e a foto do artista principal
+// Detalhes das faixas: artistas, participações, gêneros, total de plays e a foto do artista principal
 MATCH (track:Track)
 WHERE track.trackId IN $trackIds
 RETURN track.trackId  AS trackId,
@@ -10,6 +10,10 @@ RETURN track.trackId  AS trackId,
        COLLECT { MATCH (track)<-[:PRODUCES]-(artist:Artist)    RETURN artist.name } AS artists,
        COLLECT { MATCH (track)<-[:FEATURED_IN]-(guest:Artist)  RETURN guest.name  } AS featuring,
        COLLECT { MATCH (track)-[:BELONGS_TO]->(genre:Genre)    RETURN genre.name  } AS genres,
+       reduce(total = 0, plays IN COLLECT {
+         MATCH (track)<-[listen:LISTENED_TO]-(:User)
+         RETURN coalesce(listen.timesListened, 0)
+       } | total + plays) AS totalListens,
        head(COLLECT {
          MATCH (track)<-[:PRODUCES]-(artist:Artist)
          WHERE artist.photoUrl IS NOT NULL

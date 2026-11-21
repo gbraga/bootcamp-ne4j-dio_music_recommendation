@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, linkedSignal } from '@angular/core';
 import { Track } from '../../domain/models';
 import { DurationPipe } from '../../shared/duration.pipe';
 
@@ -17,6 +17,12 @@ export class TrackCard {
   readonly state = input<TrackCardState>('default');
 
   protected readonly year = computed(() => this.track().release.slice(0, 4));
+
+  /** Falls back to the gradient cover if the artist photo cannot be loaded; resets per track. */
+  protected readonly photoFailed = linkedSignal(() => {
+    this.track();
+    return false;
+  });
 
   /** Deterministic gradient so each track keeps the same cover colour. */
   protected readonly cover = computed(() => {

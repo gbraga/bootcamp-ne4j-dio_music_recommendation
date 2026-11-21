@@ -32,8 +32,10 @@ export const SEED_STEPS: readonly SeedStep[] = [
     cypher: `
       UNWIND $rows AS row
       MERGE (a:Artist {artistId: row.artistId})
-      SET a.name = row.artist_name,
-          a.age  = toInteger(row.artist_age)`,
+      SET a.name        = row.artist_name,
+          a.age         = toInteger(row.artist_age),
+          a.photoUrl    = row.photo_url,
+          a.photoCredit = row.photo_credit`,
   },
   {
     file: 'genres.csv',

@@ -205,6 +205,22 @@
                   "type": "string"
                 },
                 "nullable": false
+              },
+              {
+                "$id": "p:20",
+                "token": "photoUrl",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:21",
+                "token": "photoCredit",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
               }
             ]
           },
@@ -816,6 +832,18 @@
                 "type": "string",
                 "sample": "B30Q54HxnT",
                 "include": true
+              },
+              {
+                "name": "photo_url",
+                "type": "string",
+                "sample": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Caetano_Veloso_%28cropped%29.jpg/330px-Caetano_Veloso_%28cropped%29.jpg",
+                "include": true
+              },
+              {
+                "name": "photo_credit",
+                "type": "string",
+                "sample": "Foto: Secretaría de Cultura Ciudad de México from México · CC BY 2.0 · Wikimedia Commons",
+                "include": true
               }
             ]
           },
@@ -1081,6 +1109,18 @@
               "fieldName": "artistId",
               "property": {
                 "$ref": "#p:13"
+              }
+            },
+            {
+              "fieldName": "photo_url",
+              "property": {
+                "$ref": "#p:20"
+              }
+            },
+            {
+              "fieldName": "photo_credit",
+              "property": {
+                "$ref": "#p:21"
               }
             }
           ]

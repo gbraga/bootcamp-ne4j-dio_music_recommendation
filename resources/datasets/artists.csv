@@ -1,26 +1,26 @@
-artist_age,artist_name,artistId
-84,Caetano Veloso,B30Q54HxnT
-84,Gilberto Gil,SUwa5tpTf5
-33,Anitta,WbRuVtoJgn
-36,Taylor Swift,zfGkVKs4PV
-45,Beyoncé,2Z6dmVYL4T
-84,Paul McCartney,EpNrQ6U3Wl
-35,Ed Sheeran,Zf3QJ4SIXq
-38,Adele,xjM8V76FXp
-32,Bad Bunny,dfAdCvsnuX
-49,Shakira,1w2riphpta
-59,Marisa Monte,kaMhImvjfO
-54,Ivete Sangalo,hgMyjU8BPQ
-56,Seu Jorge,6FmQ0D7C7H
-82,Chico Buarque,DvV8Sy42Ln
-39,Kendrick Lamar,Dlqag5fetH
-77,Bruce Springsteen,krxp026pMh
-24,Billie Eilish,fjpggFkbUX
-31,Dua Lipa,4a2z6eq3ni
-34,Rosalía,E83spnvn2P
-85,Bob Dylan,DqjZz8fUDq
-83,Mick Jagger,g4Lwjf5jHK
-87,Jorge Ben Jor,rWFIqVoN5L
-79,Elton John,QsPPhbXztN
-77,Djavan,SM0Ocgn3O0
-76,Stevie Wonder,BmH8UToO3b
+artist_age,artist_name,artistId,photo_url,photo_credit
+84,Caetano Veloso,B30Q54HxnT,https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Caetano_Veloso_%28cropped%29.jpg/330px-Caetano_Veloso_%28cropped%29.jpg,Foto: Secretaría de Cultura Ciudad de México from México · CC BY 2.0 · Wikimedia Commons
+84,Gilberto Gil,SUwa5tpTf5,https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/22.05.2026_-_Gilberto_Gil_%28cropped%29.jpg/330px-22.05.2026_-_Gilberto_Gil_%28cropped%29.jpg,Foto: Ricardo Stuckert / PR · CC BY-SA 4.0 · Wikimedia Commons
+33,Anitta,WbRuVtoJgn,https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/27th_Latin_GRAMMY_Awards_-_Red_Carpet_0163-_Anitta_%28cropped%29.jpg/330px-27th_Latin_GRAMMY_Awards_-_Red_Carpet_0163-_Anitta_%28cropped%29.jpg,Foto: Jorge Jaramillo · CC BY-SA 4.0 · Wikimedia Commons
+36,Taylor Swift,zfGkVKs4PV,https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png/330px-Taylor_Swift_at_the_2023_MTV_Video_Music_Awards_%283%29.png,Foto: iHeartRadioCA · CC BY 3.0 · Wikimedia Commons
+45,Beyoncé,2Z6dmVYL4T,https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b7/Beyonc%C3%A9_-_Tottenham_Hotspur_Stadium_-_1st_June_2023_%2810_of_118%29_%2852946364598%29_%28best_crop%29.jpg/330px-Beyonc%C3%A9_-_Tottenham_Hotspur_Stadium_-_1st_June_2023_%2810_of_118%29_%2852946364598%29_%28best_crop%29.jpg,Foto: Raph_PH · CC BY 2.0 · Wikimedia Commons
+84,Paul McCartney,EpNrQ6U3Wl,https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/MaccaLyricsRFH051121_%2815_of_18%29_%28updated%29_%28cropped%29.jpg/330px-MaccaLyricsRFH051121_%2815_of_18%29_%28updated%29_%28cropped%29.jpg,Foto: Raph_PH · CC BY 2.0 · Wikimedia Commons
+35,Ed Sheeran,Zf3QJ4SIXq,https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/Ed_Sheeran_2022_%283x4_crop%29.jpg/330px-Ed_Sheeran_2022_%283x4_crop%29.jpg,Foto: Number 10 · CC BY 2.0 · Wikimedia Commons
+38,Adele,xjM8V76FXp,https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Adele_2016.jpg/330px-Adele_2016.jpg,Foto: Marc E. · CC BY 2.0 · Wikimedia Commons
+32,Bad Bunny,dfAdCvsnuX,https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Bad_Bunny_2019_by_Glenn_Francis_%28cropped%29.jpg/330px-Bad_Bunny_2019_by_Glenn_Francis_%28cropped%29.jpg,Foto: Toglenn · CC BY-SA 4.0 · Wikimedia Commons
+49,Shakira,1w2riphpta,https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg/330px-2023-11-16_Gala_de_los_Latin_Grammy%2C_03_%28cropped%2902.jpg,Foto: Junta de Andalucía · CC BY-SA 2.0 · Wikimedia Commons
+59,Marisa Monte,kaMhImvjfO,https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/Marisa_Monte_%283%29.jpg/330px-Marisa_Monte_%283%29.jpg,Foto: Pablo Escobar · CC BY 2.0 · Wikimedia Commons
+54,Ivete Sangalo,hgMyjU8BPQ,https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Ivete_Sangalo_%28Jul_2024%29.png/330px-Ivete_Sangalo_%28Jul_2024%29.png,Foto: Multishow · CC BY 3.0 · Wikimedia Commons
+56,Seu Jorge,6FmQ0D7C7H,https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Seu_Jorge.jpg/330px-Seu_Jorge.jpg,"Foto: José Goulão from Lisbon, Portugal · CC BY-SA 2.0 · Wikimedia Commons"
+82,Chico Buarque,DvV8Sy42Ln,https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/06.12.2023_-_Jantar_na_casa_do_m%C3%BAsico_Chico_Buarque_de_Holanda_%28cropped%29.jpg/330px-06.12.2023_-_Jantar_na_casa_do_m%C3%BAsico_Chico_Buarque_de_Holanda_%28cropped%29.jpg,Foto: Lula Oficial · CC BY-SA 4.0 · Wikimedia Commons
+39,Kendrick Lamar,Dlqag5fetH,https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/KendrickSZASPurs230725-144_%28cropped%29_desaturated.jpg/330px-KendrickSZASPurs230725-144_%28cropped%29_desaturated.jpg,Foto: Raph_PH · CC BY 4.0 · Wikimedia Commons
+77,Bruce Springsteen,krxp026pMh,https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Bruce_Springsteen_Springsteen-79_%28cropped%29.jpg/330px-Bruce_Springsteen_Springsteen-79_%28cropped%29.jpg,Foto: Bryan Berlin · CC BY-SA 4.0 · Wikimedia Commons
+24,Billie Eilish,fjpggFkbUX,https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/BillieEilishO2140725-39_-_54665577407_%28cropped%29.jpg/330px-BillieEilishO2140725-39_-_54665577407_%28cropped%29.jpg,Foto: Raph_PH · CC BY 4.0 · Wikimedia Commons
+31,Dua Lipa,4a2z6eq3ni,https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/Dua_Lipa-69798_%28cropped%29.jpg/330px-Dua_Lipa-69798_%28cropped%29.jpg,Foto: Harald Krichel · CC BY-SA 4.0 · Wikimedia Commons
+34,Rosalía,E83spnvn2P,https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/27th_Latin_GRAMMY_Awards_-_Red_Carpet_0291_-_Rosal%C3%ADa_Vila_Tobella_%28cropped%29.jpg/330px-27th_Latin_GRAMMY_Awards_-_Red_Carpet_0291_-_Rosal%C3%ADa_Vila_Tobella_%28cropped%29.jpg,Foto: Jorge Jaramillo · CC BY-SA 4.0 · Wikimedia Commons
+85,Bob Dylan,DqjZz8fUDq,https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/DylanYoungKilkenny140719v2_%2850_of_52%29_%2852246124397%29_%28cropped%29.jpg/330px-DylanYoungKilkenny140719v2_%2850_of_52%29_%2852246124397%29_%28cropped%29.jpg,Foto: Raph_PH · CC BY 2.0 · Wikimedia Commons
+83,Mick Jagger,g4Lwjf5jHK,https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/RStonesHydePark030722_%2849_of_125%29_%2852193656268%29_%28cropped%29.jpg/330px-RStonesHydePark030722_%2849_of_125%29_%2852193656268%29_%28cropped%29.jpg,Foto: Raph_PH · CC BY 2.0 · Wikimedia Commons
+87,Jorge Ben Jor,rWFIqVoN5L,https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Jorge_Ben%2C_1972.jpg/330px-Jorge_Ben%2C_1972.jpg,Foto: Foto Carlos · Public domain · Wikimedia Commons
+79,Elton John,QsPPhbXztN,https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/EltonDocBFILFF101024_%284_of_17%29_%28cropped%29.jpg/330px-EltonDocBFILFF101024_%284_of_17%29_%28cropped%29.jpg,Foto: Raph_PH · CC BY 2.0 · Wikimedia Commons
+77,Djavan,SM0Ocgn3O0,https://upload.wikimedia.org/wikipedia/commons/5/54/Djavan_%28cropped%29.jpg,"Foto: Aécio Neves from Brasília, Brasil · CC BY 2.0 · Wikimedia Commons"
+76,Stevie Wonder,BmH8UToO3b,https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/SWonderBSTHyde060719-72_%28cropped%29.jpg/330px-SWonderBSTHyde060719-72_%28cropped%29.jpg,Foto: Raph_PH · CC BY 2.0 · Wikimedia Commons

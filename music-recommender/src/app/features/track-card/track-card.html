@@ -1,7 +1,23 @@
 <article class="card">
-  <div class="cover" [style.background]="cover()" aria-hidden="true">
-    <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
-  </div>
+  @if (track().artistPhoto; as photo) {
+    @if (!photoFailed()) {
+      <figure class="cover photo" [title]="photo.name + ' — ' + photo.photoCredit">
+        <img
+          [src]="photo.photoUrl"
+          [alt]="'Foto de ' + photo.name"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+          (error)="photoFailed.set(true)"
+        />
+        <span class="badge" aria-hidden="true">♪</span>
+      </figure>
+    }
+  }
+  @if (!track().artistPhoto || photoFailed()) {
+    <div class="cover" [style.background]="cover()" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+    </div>
+  }
 
   <div class="body">
     <h3 class="title" [title]="track().name">{{ track().name }}</h3>

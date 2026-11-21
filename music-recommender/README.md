@@ -81,6 +81,13 @@ Músicas que o usuário já ouviu são sempre excluídas; músicas sugeridas por
 
 Clicar em um card de algoritmo destaca, no painel de recomendações, as músicas que vieram dele.
 
+### Fotos dos artistas
+
+`artists.csv` traz `photo_url` e `photo_credit` de fotos **com licença livre do Wikimedia Commons**
+(CC BY, CC BY-SA ou domínio público). O seed grava essas colunas em `:Artist {photoUrl, photoCredit}`,
+os cards de música mostram a foto do artista principal e o crédito (autor + licença) aparece ao passar
+o mouse — exigência dessas licenças. Se uma imagem falhar ao carregar, o card volta para a capa em gradiente.
+
 ### Novo ouvinte
 
 O botão **＋ Novo ouvinte** (ao lado do seletor) abre um dialog com nome, idade (10–110) e nacionalidade.

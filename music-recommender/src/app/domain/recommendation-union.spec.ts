@@ -9,6 +9,7 @@ const track = (trackId: string) => ({
   artists: [],
   featuring: [],
   genres: [],
+  artistPhoto: null,
 });
 
 const pool: CandidatePool = {

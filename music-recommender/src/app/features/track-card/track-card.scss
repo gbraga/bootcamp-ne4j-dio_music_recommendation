@@ -52,6 +52,37 @@
   }
 }
 
+.photo {
+  position: relative;
+  margin: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px rgb(8 9 32 / 0.9), 0 0 18px -4px rgb(168 85 247 / 0.9);
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+
+  .badge {
+    position: absolute;
+    right: -3px;
+    bottom: -3px;
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    box-shadow: 0 0 8px rgb(236 72 153 / 0.8);
+    color: #fff;
+    font-size: 0.7rem;
+  }
+}
+
 .body {
   flex: 1;
   min-width: 0;

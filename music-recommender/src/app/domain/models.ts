@@ -16,6 +16,13 @@ export interface NewUser {
   nationalityId: string;
 }
 
+export interface ArtistPhoto {
+  name: string;
+  photoUrl: string;
+  /** Author and licence, required by the Wikimedia Commons licences. */
+  photoCredit: string;
+}
+
 export interface Track {
   trackId: string;
   name: string;
@@ -24,6 +31,7 @@ export interface Track {
   artists: string[];
   featuring: string[];
   genres: string[];
+  artistPhoto: ArtistPhoto | null;
 }
 
 export interface ListenedTrack {

@@ -11,6 +11,7 @@ const track = (trackId: string) => ({
   artists: [],
   featuring: [],
   genres: [],
+  artistPhoto: null,
 });
 
 function serviceReturning(rows: Record<string, unknown>[]) {

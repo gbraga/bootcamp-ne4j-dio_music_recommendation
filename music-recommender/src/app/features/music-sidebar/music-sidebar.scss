@@ -5,7 +5,8 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - 2rem);
+  /* --player-space is set by the page while the bottom player is open. */
+  max-height: calc(100vh - 2rem - var(--player-space, 0px));
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -115,8 +116,17 @@
 
 .like {
   flex: none;
+  padding: 0.25rem;
+  border: 0;
+  background: transparent;
   color: var(--text-subtle);
   font-size: 1.25rem;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+
+  &:hover {
+    transform: scale(1.15);
+  }
 
   &.liked {
     color: var(--like);

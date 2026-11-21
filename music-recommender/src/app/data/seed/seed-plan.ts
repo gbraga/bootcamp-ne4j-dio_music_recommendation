@@ -56,9 +56,11 @@ export const SEED_STEPS: readonly SeedStep[] = [
     cypher: `
       UNWIND $rows AS row
       MERGE (t:Track {trackId: row.trackId})
-      SET t.name     = row.name,
-          t.duration = toInteger(row.duration),
-          t.release  = row.release`,
+      SET t.name          = row.name,
+          t.duration      = toInteger(row.duration),
+          t.release       = row.release,
+          t.previewUrl    = nullIf(row.preview_url, ''),
+          t.appleMusicUrl = nullIf(row.apple_music_url, '')`,
   },
   {
     file: 'belongs_to.csv',

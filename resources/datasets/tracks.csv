@@ -1,36 +1,36 @@
-duration,trackId,name,release
-194,R1uguOvNdp,Bad Guy,2019-03-29
-250,3oGIWQsmiY,País Tropical,1969-01-20
-258,x90ph7XUuD,Burguesinha,2007-01-01
-149,g7hs2e6mQA,Malamente,2018-05-30
-270,btEBUB9EdG,Born to Run,1975-08-25
-258,9axhElNKGQ,Haiti,1993-09-01
-177,aPaM6nFfAD,HUMBLE.,2017-03-30
-354,5Wsilo24QL,Carolina,2001-01-01
-239,DhpmRX3nlP,Dancing in the Dark,1984-05-03
-218,1eFHqjVafR,Hips Don't Lie,2006-02-28
-261,fJAnA7n4ac,Halo,2009-01-20
-199,r6dpFIVDYA,Sampa,1978-01-23
-298,YGF1bWfUX6,Happier Than Ever,2021-07-30
-369,WZblf3mgmU,Like a Rolling Stone,1965-07-20
-236,FcWXVSOzFg,Crazy in Love,2003-05-18
-203,4j784pFI8N,Levitating,2020-03-27
-195,eu6ibAvRCv,Streets of Philadelphia,1994-02-02
-296,c4xpLCvSQu,Oceano,1989-03-25
-266,BQigePeyEH,Superstition,1972-10-24
-193,Pc9kNeNRj8,Single Ladies (Put a Ring on It),2008-10-08
-218,TZLL61zguv,Sorte Grande,2003-08-08
-229,ZdQ5L9z0Zr,Maybe I'm Amazed,1970-04-17
-215,5wC7c5Z665,Ainda Bem,2011-09-30
-225,nyOA0Trkxa,Flor de Lis,1976-03-01
-179,USpJWHvFnO,Mas Que Nada,1963-01-01
-202,f3uSIFFLpW,Cold Heart (PNAU Remix),2021-08-13
-200,sIxBECh7LU,Beautiful Liar,2007-02-12
-245,MT37L2JaKH,Everything Has Changed,2012-10-22
-226,33CPkw7vf9,Ebony and Ivory,1982-03-29
-193,QOeZS4s3GH,Envolver,2021-11-11
-295,amwEF8NpV1,Hello,2015-10-23
-233,We15H2AG97,Shape of You,2017-01-06
-223,aV1o885FJ5,(I Can't Get No) Satisfaction,1965-06-06
-383,JeKXqWrh4v,Construção,1971-01-01
-243,32AbNSOHav,Tití Me Preguntó,2022-05-06
+duration,trackId,name,release,preview_url,apple_music_url
+194,R1uguOvNdp,Bad Guy,2019-03-29,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c3/87/1f/c3871f7e-3260-d615-1c66-5fdca2c3a48f/mzaf_10721331211699880949.plus.aac.p.m4a,https://music.apple.com/br/album/bad-guy/1450695723?i=1450695739
+250,3oGIWQsmiY,País Tropical,1969-01-20,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/b3/1a/97/b31a9709-dd5c-d2f6-aed4-a9d1a11997c0/mzaf_4730940646463680204.plus.aac.p.m4a,https://music.apple.com/br/album/pa%C3%ADs-tropical/1413446533?i=1413446558
+258,x90ph7XUuD,Burguesinha,2007-01-01,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/18/79/4d/18794d60-95c2-0ae7-4ca4-da23df8de8f9/mzaf_3500789058711303827.plus.aac.p.m4a,https://music.apple.com/br/album/burguesinha/1628676267?i=1628676707
+149,g7hs2e6mQA,Malamente,2018-05-30,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2d/c0/cc/2dc0cc5a-1ef7-a752-a3bf-384ba610490d/mzaf_17911450165792052942.plus.aac.p.m4a,https://music.apple.com/br/album/malamente-cap-1-augurio/1436309944?i=1436310304
+270,btEBUB9EdG,Born to Run,1975-08-25,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0e/64/14/0e641426-f2ba-95fd-c61d-bc03168a5a1c/mzaf_15664454903423188652.plus.aac.p.m4a,https://music.apple.com/br/album/born-to-run/310730204?i=310730214
+258,9axhElNKGQ,Haiti,1993-09-01,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/01/05/5d/01055d22-31b9-e139-3e87-29d08902c01c/mzaf_2769298729799368443.plus.aac.p.m4a,https://music.apple.com/br/album/haiti/1549697733?i=1549697735
+177,aPaM6nFfAD,HUMBLE.,2017-03-30,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/2d/f5/c7/2df5c74f-bda4-a0e1-82f6-c2960a76edd9/mzaf_1647179774139046115.plus.aac.p.m4a,https://music.apple.com/br/album/humble/1440907513?i=1440907873
+354,5Wsilo24QL,Carolina,2001-01-01,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/89/0e/46/890e4621-b8a7-b00d-a7fe-e8c6b99ad746/mzaf_12650248854266002488.plus.aac.p.m4a,https://music.apple.com/us/album/carolina/809688276?i=809688334
+239,DhpmRX3nlP,Dancing in the Dark,1984-05-03,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ec/c9/91/ecc99192-1c69-6aa0-5b80-35e5545528cb/mzaf_18148738310915598129.plus.aac.p.m4a,https://music.apple.com/br/album/dancing-in-the-dark/1435854353?i=1435854369
+218,1eFHqjVafR,Hips Don't Lie,2006-02-28,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/e0/5f/b4/e05fb492-7e21-d800-9774-7d5a73573ed6/mzaf_2224290767632237100.plus.aac.p.m4a,https://music.apple.com/br/album/hips-dont-lie-feat-wyclef-jean/6779764505?i=6779764759
+261,fJAnA7n4ac,Halo,2009-01-20,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/fb/4a/62/fb4a622f-727e-21f2-5d0b-078205d3b16a/mzaf_13032644911525500388.plus.aac.p.m4a,https://music.apple.com/br/album/halo/295783816?i=295784003
+199,r6dpFIVDYA,Sampa,1978-01-23,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/1b/d0/56/1bd05633-508a-f516-e99e-5b6c1045569b/mzaf_5517534460818828357.plus.aac.p.m4a,https://music.apple.com/br/album/sampa/1413453993?i=1413454563
+298,YGF1bWfUX6,Happier Than Ever,2021-07-30,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/0a/57/c9/0a57c9db-8368-ad4b-1648-49a621650822/mzaf_6359646670728179887.plus.aac.p.m4a,https://music.apple.com/br/album/happier-than-ever/1564530526?i=1564530710
+369,WZblf3mgmU,Like a Rolling Stone,1965-07-20,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a5/68/b1/a568b1af-ff36-c4c4-f8b4-f1ffe5484c3a/mzaf_7213634674974695928.plus.aac.p.m4a,https://music.apple.com/br/album/like-a-rolling-stone/201281514?i=201281527
+236,FcWXVSOzFg,Crazy in Love,2003-05-18,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/60/23/34/60233483-668a-7703-a93d-952bf40f16c0/mzaf_9494284343728979991.plus.aac.p.m4a,https://music.apple.com/br/album/crazy-in-love/262218429?i=262218448
+203,4j784pFI8N,Levitating,2020-03-27,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/59/dc/4d/59dc4dda-93ff-8f1c-c536-f005f6ea6af5/mzaf_3066686759813252385.plus.aac.p.m4a,https://music.apple.com/br/album/levitating/1538003494?i=1538003843
+195,eu6ibAvRCv,Streets of Philadelphia,1994-02-02,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/53/c2/dc/53c2dc1a-80b7-6faf-b115-cb26feba4c27/mzaf_3935405806104254596.plus.aac.p.m4a,https://music.apple.com/br/album/streets-of-philadelphia/272899249?i=272899288
+296,c4xpLCvSQu,Oceano,1989-03-25,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f7/30/99/f7309933-75c3-1f95-6e3f-85b04f979173/mzaf_16236526319111833269.plus.aac.p.m4a,https://music.apple.com/br/album/oceano/808275311?i=808275395
+266,BQigePeyEH,Superstition,1972-10-24,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/59/4b/88/594b880c-4744-0510-775c-73d8b06567e8/mzaf_14855748840810986812.plus.aac.p.m4a,https://music.apple.com/br/album/superstition/1440808973?i=1440808985
+193,Pc9kNeNRj8,Single Ladies (Put a Ring on It),2008-10-08,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/52/45/d4/5245d453-4ccf-5632-05d2-bbb04ff287b4/mzaf_9969296866038379217.plus.aac.p.m4a,https://music.apple.com/br/album/single-ladies-put-a-ring-on-it/295783816?i=295784137
+218,TZLL61zguv,Sorte Grande,2003-08-08,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/c0/27/de/c027dedb-aa9c-fa81-c113-2d44f7c6ef27/mzaf_16715979444532058845.plus.aac.p.m4a,https://music.apple.com/br/album/sorte-grande/1649840682?i=1649841142
+229,ZdQ5L9z0Zr,Maybe I'm Amazed,1970-04-17,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d6/a1/0c/d6a10ceb-d2fa-93c3-44b5-124b3946b39a/mzaf_5835282407832155289.plus.aac.p.m4a,https://music.apple.com/br/album/maybe-im-amazed/1415688338?i=1415689142
+215,5wC7c5Z665,Ainda Bem,2011-09-30,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/8b/a8/55/8ba85546-3fba-987f-4964-895bb802ec6b/mzaf_4415067841006287882.plus.aac.p.m4a,https://music.apple.com/br/album/ainda-bem/1511642934?i=1511643599
+225,nyOA0Trkxa,Flor de Lis,1976-03-01,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/8d/51/da/8d51da8b-af7b-4a6b-0703-b88af6b20629/mzaf_12339764823759044151.plus.aac.p.m4a,https://music.apple.com/br/album/flor-de-lis/379515256?i=379515281
+179,USpJWHvFnO,Mas Que Nada,1963-01-01,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/7b/6a/40/7b6a40bb-905a-f700-846e-b29a88de0d48/mzaf_11709213442413874219.plus.aac.p.m4a,https://music.apple.com/br/album/mas-que-nada/1443845510?i=1443845526
+202,f3uSIFFLpW,Cold Heart (PNAU Remix),2021-08-13,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d7/4d/bd/d74dbdd2-54dc-ef9c-b45b-842e9e9b62ff/mzaf_7817050118634864412.plus.aac.p.m4a,https://music.apple.com/br/album/cold-heart-pnau-remix/1578986656?i=1578986673
+200,sIxBECh7LU,Beautiful Liar,2007-02-12,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f0/b4/93/f0b493e3-1e4d-e55a-86f9-0a832c019622/mzaf_6427317932762593635.plus.aac.p.m4a,https://music.apple.com/br/album/beautiful-liar/218965111?i=218965128
+245,MT37L2JaKH,Everything Has Changed,2012-10-22,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a8/a9/0c/a8a90c9c-e986-34e5-203b-48948984a3a8/mzaf_11509403441616551094.plus.aac.p.m4a,https://music.apple.com/br/album/everything-has-changed-feat-ed-sheeran/1440873509?i=1440873769
+226,33CPkw7vf9,Ebony and Ivory,1982-03-29,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/8f/1b/e8/8f1be81b-302e-c397-4ce7-e76e802dac51/mzaf_3801478543646876934.plus.aac.p.m4a,https://music.apple.com/br/album/ebony-and-ivory/1440942051?i=1440942063
+193,QOeZS4s3GH,Envolver,2021-11-11,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/2a/6f/96/2a6f96a5-b362-d87c-eadc-d477d1ed47c3/mzaf_14425900406954055410.plus.aac.p.m4a,https://music.apple.com/br/album/envolver/1593185587?i=1593185593
+295,amwEF8NpV1,Hello,2015-10-23,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/10/7e/9d/107e9dc0-c13b-eace-2486-84a3c694b075/mzaf_6267923862748965591.plus.aac.p.m4a,https://music.apple.com/br/album/hello/1544494115?i=1544494392
+233,We15H2AG97,Shape of You,2017-01-06,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/44/c7/4f/44c74f0d-72dc-6143-d4d0-ba14d661ca0d/mzaf_9566898362556366703.plus.aac.p.m4a,https://music.apple.com/br/album/shape-of-you/1193701079?i=1193701392
+223,aV1o885FJ5,(I Can't Get No) Satisfaction,1965-06-06,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ee/4d/28/ee4d28cd-a465-1334-2863-efda9ea9669b/mzaf_8440807812349084607.plus.aac.p.m4a,https://music.apple.com/br/album/i-cant-get-no-satisfaction/1440743344?i=1440743544
+383,JeKXqWrh4v,Construção,1971-01-01,https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/8e/7e/9f/8e7e9fe4-460a-1315-0446-0a1b1e6e8bf2/mzaf_4515736169565587167.plus.aac.p.m4a,https://music.apple.com/br/album/constru%C3%A7%C3%A3o/1442845496?i=1442845504
+243,32AbNSOHav,Tití Me Preguntó,2022-05-06,,

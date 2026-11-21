@@ -82,3 +82,13 @@
   (closed)="newUserOpen.set(false)"
   (created)="onUserCreated($event)"
 />
+
+@if (store.nowPlaying(); as track) {
+  <app-player
+    [track]="track"
+    [liked]="store.likedTrackIds().has(track.trackId)"
+    [error]="store.actionError()"
+    (likeToggled)="store.toggleLike(track)"
+    (closed)="store.stopPlayer()"
+  />
+}

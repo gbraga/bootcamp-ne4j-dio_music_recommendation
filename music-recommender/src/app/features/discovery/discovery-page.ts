@@ -6,16 +6,19 @@ import { CustomAlgorithmCard } from '../custom-algorithm-card/custom-algorithm-c
 import { HeroOrb } from '../hero-orb/hero-orb';
 import { MusicSidebar } from '../music-sidebar/music-sidebar';
 import { NewUserDialog } from '../new-user-dialog/new-user-dialog';
+import { Player } from '../player/player';
 import { UserPicker } from '../user-picker/user-picker';
 import { DiscoveryStore } from './discovery.store';
 
 @Component({
   selector: 'app-discovery-page',
-  imports: [AlgorithmCard, CustomAlgorithmCard, HeroOrb, MusicSidebar, NewUserDialog, UserPicker],
+  imports: [AlgorithmCard, CustomAlgorithmCard, HeroOrb, MusicSidebar, NewUserDialog, Player, UserPicker],
   templateUrl: './discovery-page.html',
   styleUrl: './discovery-page.scss',
   providers: [DiscoveryStore],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // Room reserved for the fixed bottom player (used by the page padding and the sidebar height).
+  host: { '[style.--player-space]': "store.nowPlaying() ? '6.5rem' : '0px'" },
 })
 export class DiscoveryPage {
   protected readonly store = inject(DiscoveryStore);

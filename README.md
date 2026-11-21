@@ -17,6 +17,8 @@ Projeto do bootcamp **Neo4j (DIO)**: uma rede de streaming de música modelada c
 - Clicar em um card **destaca** as músicas que vieram daquele algoritmo.
 - Um card **"Seu algoritmo"** permite **escrever e executar a sua própria consulta Cypher**.
 - É possível **cadastrar novos ouvintes**, que já recebem recomendações imediatamente.
+- **Player com prévias de 30 s** e **like**: cada play e cada curtida são gravados no grafo para o ouvinte
+  selecionado — e as recomendações se recalculam na hora.
 - Fotos reais dos artistas (licenças livres do Wikimedia Commons, com crédito).
 
 ---
@@ -144,6 +146,40 @@ então passam a contribuir conforme o ouvinte for escutando músicas.
 E a experiência é personalizável: o ouvinte pode **escolher quais algoritmos quer ativar** (o interruptor de
 cada card) e até **escrever o seu próprio algoritmo** em Cypher — como o exemplo por nacionalidade, que
 também já funciona para quem acabou de chegar.
+
+O ouvinte é gravado no **AuraDB** (não apenas na tela): ele continua na lista ao recarregar a página e em
+qualquer outro acesso. Só o `npm run seed`, que recria o grafo a partir dos CSVs, o removeria.
+
+---
+
+## ▶️ Player e likes: o grafo aprende com o ouvinte
+
+Cada música recomendada (e do histórico) tem um botão **▶** sobre a foto do artista. Ele abre o player
+no rodapé, que toca uma **prévia de 30 segundos** e tem o botão **♥ curtir** e o link **"Ouvir completa"**
+no Apple Music.
+
+Tudo é **persistido no ouvinte selecionado**, direto no grafo:
+
+```cypher
+// ▶ play: cria a relação na primeira vez e soma um play nas seguintes
+MERGE (user)-[listen:LISTENED_TO]->(track)
+  ON CREATE SET listen.timesListened = 1, listen.liked = false, listen.listenDate = datetime()
+  ON MATCH SET  listen.timesListened = listen.timesListened + 1
+
+// ♥ like
+MERGE (user)-[listen:LISTENED_TO]->(track)
+SET listen.liked = $liked
+```
+
+Depois de cada play ou like, histórico e recomendações são recalculados — a música tocada sai das
+recomendações, e curtir, por exemplo, uma MPB faz o algoritmo **"Gêneros que você curte"** passar a sugerir
+outras MPBs. É o ciclo completo: o novo ouvinte começa com **"Da sua geração"** e **"Top 3"** e, conforme
+ouve e curte, **"Dos seus artistas"** e **"Gêneros que você curte"** entram em ação.
+
+> As prévias (AAC/.m4a) vêm da **iTunes Search API** da Apple, buscadas uma vez e guardadas em
+> `tracks.csv` (`preview_url`, `apple_music_url`). Funcionam no Chrome, Edge, Firefox e Safari; navegadores
+> embutidos sem o codec AAC (como o do VS Code) mostram um aviso. *Tití Me Preguntó* não tem prévia
+> disponível e aparece sem o botão de play.
 
 ---
 

@@ -28,6 +28,9 @@ export interface Track {
   name: string;
   duration: number;
   release: string;
+  /** 30-second preview (iTunes Search API); null when no preview exists. */
+  previewUrl: string | null;
+  appleMusicUrl: string | null;
   artists: string[];
   featuring: string[];
   genres: string[];

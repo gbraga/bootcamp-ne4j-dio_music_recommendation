@@ -8,6 +8,8 @@ import recommendLikedGenres from './recommend-liked-genres.cypher';
 import customExample from './custom-example.cypher';
 import nationalities from './nationalities.cypher';
 import createUser from './create-user.cypher';
+import registerListen from './register-listen.cypher';
+import setLike from './set-like.cypher';
 
 /** Cypher queries live in .cypher files and are bundled as plain text. */
 export const Queries = {
@@ -15,6 +17,8 @@ export const Queries = {
   nationalities,
   createUser,
   listeningHistory,
+  registerListen,
+  setLike,
   trackDetails,
   recommendSameAge,
   recommendFromArtists,

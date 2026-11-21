@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, linkedSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, linkedSignal, output } from '@angular/core';
 import { Track } from '../../domain/models';
 import { DurationPipe } from '../../shared/duration.pipe';
 
@@ -15,6 +15,9 @@ export type TrackCardState = 'default' | 'highlighted' | 'dimmed';
 export class TrackCard {
   readonly track = input.required<Track>();
   readonly state = input<TrackCardState>('default');
+  /** True while this track is loaded in the player. */
+  readonly playing = input(false);
+  readonly playRequested = output<void>();
 
   protected readonly year = computed(() => this.track().release.slice(0, 4));
 

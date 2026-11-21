@@ -1,7 +1,7 @@
 import { Injectable, computed, inject, linkedSignal, resource, signal } from '@angular/core';
 import { DatabaseSeeder } from '../../data/seed/database-seeder';
 import { ListeningService } from '../../domain/listening.service';
-import { AlgorithmId, CandidatePool, User } from '../../domain/models';
+import { AlgorithmId, CandidatePool, Track, User } from '../../domain/models';
 import { ALL_ALGORITHM_IDS, CUSTOM_ALGORITHM } from '../../domain/recommendation-algorithms';
 import { unionRecommendations } from '../../domain/recommendation-union';
 import { RecommendationService } from '../../domain/recommendation.service';
@@ -65,6 +65,27 @@ export class DiscoveryStore {
     const error = this.customResult.error();
     return error ? (error as Error).message : null;
   });
+
+  /** Track loaded in the player; cleared when another listener is selected. */
+  readonly nowPlaying = linkedSignal<string | undefined, Track | null>({
+    source: () => this.selectedUserId(),
+    computation: () => null,
+  });
+
+  /** Likes clicked but not yet reflected in the reloaded history (optimistic UI). */
+  private readonly pendingLikes = linkedSignal<unknown, ReadonlyMap<string, boolean>>({
+    source: () => this.history.value(),
+    computation: () => new Map(),
+  });
+
+  readonly likedTrackIds = computed(() => {
+    const liked = new Set((this.history.value() ?? []).filter((item) => item.liked).map((item) => item.track.trackId));
+    this.pendingLikes().forEach((value, trackId) => (value ? liked.add(trackId) : liked.delete(trackId)));
+    return liked;
+  });
+
+  /** Last error from a play/like write, shown in the player. */
+  readonly actionError = signal<string | null>(null);
 
   /** Custom results come first; a failing custom query never hides the other algorithms. */
   private readonly pool = computed<CandidatePool>(() => {
@@ -132,5 +153,38 @@ export class DiscoveryStore {
   resetCustom(): void {
     localStorage.removeItem(CUSTOM_CYPHER_KEY);
     this.customCypher.set(CUSTOM_ALGORITHM.cypher);
+  }
+
+  /** Plays a preview and records the listen for the selected user (LISTENED_TO in the graph). */
+  async play(track: Track): Promise<void> {
+    const userId = this.selectedUserId();
+    if (!userId || !track.previewUrl) return;
+    this.nowPlaying.set(track);
+    await this.persist(() => this.listening.registerListen(userId, track.trackId));
+  }
+
+  async toggleLike(track: Track): Promise<void> {
+    const userId = this.selectedUserId();
+    if (!userId) return;
+    const liked = !this.likedTrackIds().has(track.trackId);
+    this.pendingLikes.update((pending) => new Map(pending).set(track.trackId, liked));
+    await this.persist(() => this.listening.setLiked(userId, track.trackId, liked));
+  }
+
+  stopPlayer(): void {
+    this.nowPlaying.set(null);
+  }
+
+  /** Writes to the graph, then reloads what depends on the user's listening history. */
+  private async persist(write: () => Promise<void>): Promise<void> {
+    this.actionError.set(null);
+    try {
+      await write();
+    } catch (error) {
+      this.actionError.set((error as Error).message);
+    }
+    this.history.reload();
+    this.candidates.reload();
+    this.customResult.reload();
   }
 }

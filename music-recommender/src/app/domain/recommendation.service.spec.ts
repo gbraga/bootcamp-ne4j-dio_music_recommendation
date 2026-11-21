@@ -8,6 +8,8 @@ const track = (trackId: string) => ({
   name: trackId,
   duration: 200,
   release: '2020-01-01',
+  previewUrl: null,
+  appleMusicUrl: null,
   artists: [],
   featuring: [],
   genres: [],

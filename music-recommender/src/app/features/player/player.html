@@ -1,0 +1,81 @@
+<section class="player glass" aria-label="Player">
+  <audio
+    #audio
+    preload="auto"
+    (play)="paused.set(false)"
+    (pause)="paused.set(true)"
+    (ended)="paused.set(true)"
+    (timeupdate)="onTimeUpdate(audio)"
+    (loadedmetadata)="onTimeUpdate(audio)"
+    (error)="loadFailed.set(true)"
+  ></audio>
+
+  <div class="now">
+    @if (track().artistPhoto; as photo) {
+      <img class="art" [src]="photo.photoUrl" [alt]="'Foto de ' + photo.name" [title]="photo.photoCredit" referrerpolicy="no-referrer" />
+    } @else {
+      <span class="art placeholder" aria-hidden="true">♪</span>
+    }
+    <div class="info">
+      <strong [title]="track().name">{{ track().name }}</strong>
+      <span>
+        {{ track().artists.join(', ') }}
+        @if (track().featuring.length) {
+          · feat. {{ track().featuring.join(', ') }}
+        }
+      </span>
+    </div>
+    <button
+      type="button"
+      class="like"
+      [class.on]="liked()"
+      [attr.aria-pressed]="liked()"
+      [attr.aria-label]="liked() ? 'Descurtir' : 'Curtir'"
+      (click)="likeToggled.emit()"
+    >
+      {{ liked() ? '♥' : '♡' }}
+    </button>
+  </div>
+
+  <div class="controls">
+    <button
+      type="button"
+      class="toggle"
+      [disabled]="loadFailed()"
+      [attr.aria-label]="paused() ? 'Tocar' : 'Pausar'"
+      (click)="toggle()"
+    >
+      @if (paused()) {
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+      } @else {
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" /></svg>
+      }
+    </button>
+    <span class="time">{{ format(current()) }}</span>
+    <input
+      type="range"
+      min="0"
+      max="100"
+      step="0.1"
+      aria-label="Posição da música"
+      [value]="progress()"
+      [style.--progress.%]="progress()"
+      (input)="seek($event)"
+    />
+    <span class="time">{{ format(duration()) }}</span>
+  </div>
+
+  <div class="extra">
+    @if (error() || loadFailed()) {
+      <span class="error" role="alert">
+        {{ error() ?? (supportsAac ? 'Não foi possível carregar a prévia.' : 'Navegador sem suporte a AAC: use Chrome, Edge, Firefox ou Safari.') }}
+      </span>
+    } @else {
+      <span class="hint">Prévia de 30s · iTunes</span>
+    }
+    @if (track().appleMusicUrl) {
+      <a [href]="track().appleMusicUrl" target="_blank" rel="noopener">Ouvir completa ↗</a>
+    }
+    <button type="button" class="close" aria-label="Fechar player" (click)="closed.emit()">✕</button>
+  </div>
+</section>

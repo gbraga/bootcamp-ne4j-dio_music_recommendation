@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, linkedSignal } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { AlgorithmId, Recommendation } from '../../domain/models';
+import { AlgorithmId, Recommendation, Track } from '../../domain/models';
 import { algorithmById } from '../../domain/recommendation-algorithms';
 import { DiscoveryStore } from '../discovery/discovery.store';
 import { TrackCard, TrackCardState } from '../track-card/track-card';
@@ -24,6 +24,10 @@ export class MusicSidebar {
     this.store.highlightedAlgorithm();
     return 'recommended';
   });
+
+  protected isPlaying(track: Track): boolean {
+    return this.store.nowPlaying()?.trackId === track.trackId;
+  }
 
   protected stateOf(recommendation: Recommendation): TrackCardState {
     const highlighted = this.store.highlightedAlgorithm();

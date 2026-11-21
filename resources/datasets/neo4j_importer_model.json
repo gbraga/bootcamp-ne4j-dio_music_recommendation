@@ -175,6 +175,22 @@
                   "type": "string"
                 },
                 "nullable": true
+              },
+              {
+                "$id": "p:22",
+                "token": "previewUrl",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:23",
+                "token": "appleMusicUrl",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
               }
             ]
           },
@@ -807,6 +823,18 @@
                 "type": "string",
                 "sample": "2019-03-29",
                 "include": true
+              },
+              {
+                "name": "preview_url",
+                "type": "string",
+                "sample": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/c3/87/1f/c3871f7e-3260-d615-1c66-5fdca2c3a48f/mzaf_10721331211699880949.plus.aac.p.m4a",
+                "include": true
+              },
+              {
+                "name": "apple_music_url",
+                "type": "string",
+                "sample": "https://music.apple.com/br/album/bad-guy/1450695723?i=1450695739",
+                "include": true
               }
             ]
           },
@@ -1081,6 +1109,18 @@
               "fieldName": "release",
               "property": {
                 "$ref": "#p:9"
+              }
+            },
+            {
+              "fieldName": "preview_url",
+              "property": {
+                "$ref": "#p:22"
+              }
+            },
+            {
+              "fieldName": "apple_music_url",
+              "property": {
+                "$ref": "#p:23"
               }
             }
           ]

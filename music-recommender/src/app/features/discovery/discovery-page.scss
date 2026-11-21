@@ -1,6 +1,6 @@
 :host {
   display: block;
-  padding-bottom: 4rem;
+  padding-bottom: calc(4rem + var(--player-space, 0px));
 }
 
 /* Top navigation */

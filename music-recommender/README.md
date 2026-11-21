@@ -81,6 +81,15 @@ Músicas que o usuário já ouviu são sempre excluídas; músicas sugeridas por
 
 Clicar em um card de algoritmo destaca, no painel de recomendações, as músicas que vieram dele.
 
+### Player, plays e likes
+
+O botão **▶** sobre a capa (recomendações e histórico) abre o [player](src/app/features/player) com a
+prévia de 30 s (`Track.previewUrl`, iTunes Search API). Cada play executa
+[`register-listen.cypher`](src/app/data/queries/register-listen.cypher) e cada ♥ executa
+[`set-like.cypher`](src/app/data/queries/set-like.cypher) para o **ouvinte selecionado**; em seguida o store
+recarrega histórico e recomendações (sem skeleton, para a lista não piscar). O like é otimista: o coração
+muda na hora e é confirmado pelo recarregamento.
+
 ### Fotos dos artistas
 
 `artists.csv` traz `photo_url` e `photo_credit` de fotos **com licença livre do Wikimedia Commons**

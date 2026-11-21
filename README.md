@@ -548,56 +548,25 @@ https://gbraga.github.io/bootcamp-ne4j-dio_music_recommendation/
 
 ## 🩹 Troubleshooting: dificuldades e soluções
 
-**1. Números do Neo4j chegavam como objetos `{low, high}` no JavaScript**
-- *Causa:* o inteiro do Neo4j tem 64 bits, e o `number` do JavaScript não representa todos os valores
-  com segurança. Por isso o driver devolve um tipo `Integer` próprio.
-- *Solução:* criar o driver com `{ disableLosslessIntegers: true }`
-  ([`neo4j-client.ts`](music-recommender/src/app/core/neo4j/neo4j-client.ts)). Os valores do projeto são
-  pequenos, então a conversão para `number` é segura.
-
-**2. Tudo vem do CSV como texto**
+**1. Tudo vem do CSV como texto**
 - *Causa:* `LOAD CSV` lê todas as colunas como `String`, e uma coluna vazia vira `''`, não `null`. Sem
   conversão, `sum(l.timesListened)` falha e o filtro `{liked: true}` não encontra nada, porque compara
   `'true'` (texto) com `true`.
 - *Solução:* converter na carga com `toInteger()`, `toBoolean()` e `datetime()`, e usar `nullIf(valor, '')`
   para campos opcionais, como `preview_url` (*Tití Me Preguntó* não tem prévia).
 
-**3. LOAD CSV no AuraDB**
+**2. LOAD CSV no AuraDB**
 - *Causa:* o AuraDB não tem a pasta `import/`, então `file:///` não funciona.
-- *Solução:* ler os CSVs por URL pública (raw do GitHub) no script de carga. Na aplicação, os CSVs são
-  copiados para `public/datasets` e enviados ao Neo4j como parâmetro (`UNWIND $rows`).
+- *Solução:* ler os CSVs por URL pública (raw do GitHub) no
+  [script de carga](resources/cypher/01-carga-load-csv.cypher).
 
-**4. Carga duplicada ou corrompida ao abrir duas abas**
-- *Causa:* a importação automática roda quando o banco está vazio. Duas abas abertas ao mesmo tempo
-  podiam importar em paralelo.
-- *Solução:* constraints de unicidade, `MERGE` em vez de `CREATE` e a carga inteira **numa única
-  transação** ([`seed-plan.ts`](music-recommender/src/app/data/seed/seed-plan.ts)).
+**3. Carga repetida duplicando nós e relacionamentos**
+- *Causa:* com `CREATE`, rodar a carga duas vezes duplica tudo, e os `MATCH` por id passam a encontrar
+  mais de um nó.
+- *Solução:* constraints de unicidade em cada id (que também criam os índices usados nos `MATCH` da carga
+  dos relacionamentos) e `MERGE` em vez de `CREATE`. Assim a carga pode ser repetida sem efeito colateral.
 
-**5. Executar Cypher digitado pelo usuário sem deixar apagar o banco**
-- *Causa:* o card "Seu algoritmo" aceita qualquer Cypher.
-- *Solução:* executar com `routing: READ` (transação de leitura). O próprio Neo4j rejeita `CREATE`,
-  `SET` e `DELETE`. A consulta também precisa retornar `trackId`, e um erro aparece só no card, sem
-  derrubar os outros algoritmos.
-
-**6. Credenciais sem backend e deploy no GitHub Pages**
-- *Problema:* sem backend, o driver roda no navegador e as credenciais vão no JavaScript publicado.
-- *Solução:* `.env` fora do Git; o build gera `neo4j.env.ts` a partir dos **secrets** do repositório no
-  GitHub Actions; e a instância é **exclusiva para demonstração**, restaurável pelos CSVs com
-  `npm run seed`. Também foi preciso publicar com `--base-href /<repositório>/`, senão o Pages não
-  encontra os arquivos.
-
-**7. Prévias de áudio que não tocavam**
-- *Causa:* as prévias da iTunes Search API são AAC (`.m4a`), e navegadores embutidos sem esse codec (como
-  o do VS Code) não tocam o áudio.
-- *Solução:* detectar com `canPlayType('audio/mp4; codecs="mp4a.40.2"')` e mostrar um aviso, em vez de
-  falhar em silêncio.
-
-**8. Fotos dos artistas: licença e links quebrados**
-- *Solução:* usar só imagens com licença livre do Wikimedia Commons, exibir autor e licença
-  (`photoCredit`), carregar com `referrerpolicy="no-referrer"` e voltar para uma capa em gradiente se a
-  imagem falhar.
-
-**9. Dados de exemplo verossímeis**
+**4. Dados de exemplo verossímeis**
 - *Cuidado:* datas de audição aleatórias podem cair antes do lançamento da música ou antes de o ouvinte
   ter idade para ouvi-la, o que distorce as análises por idade.
 - *Solução:* gerar `listenDate` respeitando a data de lançamento e a idade, para que as perguntas de

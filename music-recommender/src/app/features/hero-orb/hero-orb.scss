@@ -1,0 +1,49 @@
+:host {
+  display: block;
+  filter: drop-shadow(0 0 40px rgb(139 92 246 / 0.45));
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.spin {
+  transform-origin: 200px 230px;
+  animation: sway 9s ease-in-out infinite;
+}
+
+.pulse {
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes sway {
+  50% {
+    transform: rotate(6deg);
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float,
+  .spin,
+  .pulse {
+    animation: none;
+  }
+}

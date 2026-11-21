@@ -9,7 +9,8 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md), 0 0 40px -20px rgb(139 92 246 / 0.6);
+  backdrop-filter: blur(14px);
   overflow: hidden;
 }
 
@@ -39,9 +40,9 @@
     transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 
     &[aria-selected='true'] {
-      background: var(--surface);
+      background: linear-gradient(90deg, rgb(168 85 247 / 0.35), rgb(236 72 153 / 0.35));
       color: var(--text);
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 0 0 1px var(--border-strong);
     }
 
     &:focus-visible {
@@ -53,8 +54,8 @@
 .pill {
   padding: 0 0.5rem;
   border-radius: 999px;
-  background: var(--border);
-  color: var(--text-muted);
+  background: rgb(255 255 255 / 0.08);
+  color: var(--text);
   font-size: 0.75rem;
 }
 
@@ -76,7 +77,8 @@
   border: 0;
   border-radius: 999px;
   background: var(--algo);
-  color: #fff;
+  box-shadow: 0 0 18px -4px var(--algo);
+  color: var(--bg);
   font: inherit;
   font-size: 0.8rem;
   font-weight: 600;
@@ -117,7 +119,8 @@
   font-size: 1.25rem;
 
   &.liked {
-    color: #e11d48;
+    color: var(--like);
+    text-shadow: 0 0 10px var(--like);
   }
 }
 
@@ -161,8 +164,8 @@
 .alert {
   padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
-  background: #fef2f2;
-  color: #b91c1c;
+  background: var(--danger-bg);
+  color: var(--danger);
 }
 
 .muted {

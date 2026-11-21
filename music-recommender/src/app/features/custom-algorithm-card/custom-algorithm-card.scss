@@ -1,5 +1,7 @@
 :host {
   display: block;
+  /* Grid items default to min-width: auto; long Cypher tokens would push the card over its neighbour. */
+  min-width: 0;
 }
 
 .card {
@@ -7,20 +9,32 @@
   flex-direction: column;
   height: 100%;
   padding: 1rem 1.25rem;
-  background: var(--surface);
+  position: relative;
+  background:
+    radial-gradient(60% 120% at 0% 0%, var(--algo-soft), transparent 60%),
+    var(--surface);
   border: 1px solid var(--border);
-  border-top: 4px solid var(--algo);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(14px);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 8% auto;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, var(--algo), var(--brand-2), transparent);
+    box-shadow: 0 0 14px 1px var(--algo);
+  }
   transition: box-shadow 0.2s ease, background 0.2s ease, opacity 0.2s ease;
 
   &.highlighted {
-    background: linear-gradient(180deg, var(--algo-soft), var(--surface) 40%);
-    box-shadow: 0 0 0 2px var(--algo), var(--shadow-md);
+    border-color: var(--algo);
+    box-shadow: 0 0 0 1px var(--algo), 0 0 36px -6px var(--algo);
   }
 
   &.disabled {
-    border-top-color: var(--border);
 
     .editor,
     .description {
@@ -123,7 +137,7 @@ h3 {
   padding: 0.125rem 0.5rem;
   border-radius: 999px;
   background: var(--algo);
-  color: #fff;
+  color: var(--bg);
   font-size: 0.8rem;
   font-weight: 600;
   text-align: center;
@@ -138,6 +152,7 @@ h3 {
 /* A transparent textarea over a highlighted <pre>: both must share font, padding and wrapping. */
 .editor {
   position: relative;
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   background: var(--code-bg);
 
@@ -186,8 +201,8 @@ h3 {
   margin: 0;
   padding: 0.625rem 0.875rem;
   border-radius: var(--radius-md);
-  background: #fef2f2;
-  color: #b91c1c;
+  background: var(--danger-bg);
+  color: var(--danger);
   font: 0.8rem/1.5 var(--font-mono);
   white-space: pre-wrap;
 }
@@ -222,13 +237,16 @@ footer {
 
   .primary {
     border: 0;
-    background: var(--algo);
+    border-radius: 999px;
+    background: linear-gradient(90deg, #a855f7, #ec4899);
+    box-shadow: 0 0 20px -6px rgb(236 72 153 / 0.9);
     color: #fff;
   }
 
   .ghost {
-    border: 1px solid var(--border);
-    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: transparent;
     color: var(--text);
 
     &[aria-pressed='true'] {

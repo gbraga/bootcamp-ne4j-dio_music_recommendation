@@ -1,8 +1,21 @@
-<header class="hero">
-  <div class="container">
-    <p class="brand"><span class="logo" aria-hidden="true">♪</span> Graph Music · Neo4j AuraDB</p>
-    <h1>Descubra o que ouvir a seguir</h1>
-    <p class="lead">Recomendações geradas a partir do grafo de ouvintes, artistas e músicas.</p>
+<nav class="topbar container" aria-label="Principal">
+  <a class="logo" href="#">
+    <span class="mark" aria-hidden="true">♪</span>
+    <span class="logo-text"><strong>Graph Music</strong><small>Neo4j AuraDB</small></span>
+  </a>
+  <ul class="links">
+    <li><a href="#algoritmos">Algoritmos</a></li>
+    <li><a href="#seu-algoritmo">Seu algoritmo</a></li>
+    <li><a href="#musicas">Músicas</a></li>
+  </ul>
+  <a class="cta" href="#seu-algoritmo">Escrever algoritmo</a>
+</nav>
+
+<header class="hero container">
+  <div class="hero-copy">
+    <p class="eyebrow">Recomendação com grafos</p>
+    <h1>Descubra o que<br /><span class="gradient-text">ouvir a seguir.</span></h1>
+    <p class="lead">Recomendações geradas a partir do grafo de ouvintes, artistas, gêneros e músicas no Neo4j AuraDB.</p>
 
     @if (store.users.error()) {
       <p class="alert">Não foi possível conectar ao Neo4j. Verifique o .env e se a instância AuraDB está ativa.</p>
@@ -15,18 +28,20 @@
       />
     }
   </div>
+  <app-hero-orb class="hero-art" />
 </header>
 
-<div class="container layout">
-  <div class="section-head">
-    <h2 id="algorithms-title">Como recomendamos</h2>
-    <p>As recomendações são a união dos algoritmos ativos. Escreva o seu próprio em Cypher, ligue ou desligue cada um e clique em um card para destacar suas músicas.</p>
-  </div>
+<section class="container intro" aria-labelledby="algorithms-title">
+  <h2 class="section-title" id="algorithms-title">Como recomendamos</h2>
+  <p>As recomendações são a união dos algoritmos ativos. Escreva o seu próprio em Cypher, ligue ou desligue cada um e clique em um card para destacar suas músicas.</p>
+</section>
 
-  <main aria-labelledby="algorithms-title">
+<div class="container layout">
+  <main id="algoritmos" aria-labelledby="algorithms-title">
     <div class="algorithms">
       <app-custom-algorithm-card
         class="custom"
+        id="seu-algoritmo"
         [algorithm]="customAlgorithm"
         [cypher]="store.customCypher()"
         [count]="store.selectedUserId() && store.customResult.hasValue() ? store.countByAlgorithm().custom : null"
@@ -52,5 +67,5 @@
     </div>
   </main>
 
-  <app-music-sidebar class="sidebar" />
+  <app-music-sidebar class="sidebar" id="musicas" />
 </div>

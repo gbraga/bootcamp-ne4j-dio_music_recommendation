@@ -1,54 +1,67 @@
+/* Dark "neon" theme: deep navy background with violet / magenta / cyan glows. */
 :root {
-  --brand: #4f46e5;
-  --brand-2: #9333ea;
+  color-scheme: dark;
 
-  --bg: #f5f6fb;
-  --surface: #ffffff;
-  --surface-muted: #eef0f6;
-  --border: #e3e6ef;
-  --text: #141726;
-  --text-muted: #555b70;
-  --text-subtle: #8a90a3;
+  --brand: #8b5cf6;
+  --brand-2: #ec4899;
+  --accent: #22d3ee;
+  --brand-gradient: linear-gradient(90deg, #a78bfa 0%, #ec4899 55%, #f0abfc 100%);
 
-  --code-bg: #12141f;
+  --bg: #080920;
+  --surface: rgb(20 22 52 / 0.72);
+  --surface-solid: #14163a;
+  --surface-muted: rgb(139 92 246 / 0.1);
+  --border: rgb(139 92 246 / 0.22);
+  --border-strong: rgb(167 139 250 / 0.45);
+  --text: #eeeefe;
+  --text-muted: #a4a7cc;
+  --text-subtle: #6d7099;
+
+  --code-bg: #05061a;
   --code-text: #d7dae6;
 
+  --danger: #fca5a5;
+  --danger-bg: rgb(239 68 68 / 0.12);
+  --like: #f472b6;
+
   --radius-md: 10px;
-  --radius-lg: 16px;
-  --shadow-sm: 0 1px 2px rgb(20 23 38 / 0.06), 0 1px 3px rgb(20 23 38 / 0.04);
-  --shadow-md: 0 10px 25px -10px rgb(20 23 38 / 0.2);
+  --radius-lg: 18px;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 18px 40px -18px rgb(0 0 0 / 0.8);
+  --glow: 0 0 0 1px var(--border-strong), 0 0 28px -6px rgb(139 92 246 / 0.55);
 
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', var(--font-sans);
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --algo: var(--brand);
-  --algo-soft: rgb(79 70 229 / 0.12);
+  --algo-soft: rgb(139 92 246 / 0.16);
 }
 
-/* One colour per recommendation algorithm, shared by cards, badges and highlights. */
+/* One neon colour per recommendation algorithm, shared by cards, badges and highlights. */
 [data-algorithm='custom'] {
-  --algo: #2563eb;
-  --algo-soft: rgb(37 99 235 / 0.12);
+  --algo: #60a5fa;
+  --algo-soft: rgb(96 165 250 / 0.16);
 }
 
 [data-algorithm='same-age'] {
-  --algo: #7c3aed;
-  --algo-soft: rgb(124 58 237 / 0.12);
+  --algo: #a78bfa;
+  --algo-soft: rgb(167 139 250 / 0.16);
 }
 
 [data-algorithm='from-artists'] {
-  --algo: #0d9488;
-  --algo-soft: rgb(13 148 136 / 0.12);
+  --algo: #2dd4bf;
+  --algo-soft: rgb(45 212 191 / 0.14);
 }
 
 [data-algorithm='top-tracks'] {
-  --algo: #d97706;
-  --algo-soft: rgb(217 119 6 / 0.14);
+  --algo: #fbbf24;
+  --algo-soft: rgb(251 191 36 / 0.14);
 }
 
 [data-algorithm='liked-genres'] {
-  --algo: #db2777;
-  --algo-soft: rgb(219 39 119 / 0.12);
+  --algo: #f472b6;
+  --algo-soft: rgb(244 114 182 / 0.16);
 }
 
 *,
@@ -59,15 +72,66 @@
 
 body {
   margin: 0;
-  background: var(--bg);
+  min-height: 100vh;
+  background:
+    radial-gradient(900px 600px at 85% -10%, rgb(168 85 247 / 0.28), transparent 60%),
+    radial-gradient(700px 500px at -10% 20%, rgb(59 130 246 / 0.16), transparent 60%),
+    radial-gradient(800px 600px at 50% 110%, rgb(236 72 153 / 0.12), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: rgb(236 72 153 / 0.35);
+}
+
 .container {
   width: calc(100% - 2rem);
   margin-inline: auto;
+}
+
+/* Glassy dark surface used by cards and panels. */
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(14px);
+}
+
+/* Centered section title between hairlines, as in the reference layout. */
+.section-title {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  margin: 0;
+  color: var(--text);
+  font: 500 1.35rem var(--font-display);
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+  }
+}
+
+.gradient-text {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* Toggle switch shared by the algorithm cards (coloured with the card's --algo). */
@@ -90,7 +154,8 @@ body {
     width: 36px;
     height: 20px;
     border-radius: 999px;
-    background: var(--border);
+    background: var(--surface-muted);
+    box-shadow: inset 0 0 0 1px var(--border);
     transition: background 0.2s ease;
 
     &::after {
@@ -101,7 +166,7 @@ body {
       width: 16px;
       height: 16px;
       border-radius: 50%;
-      background: #fff;
+      background: var(--text);
       box-shadow: var(--shadow-sm);
       transition: transform 0.2s ease;
     }
@@ -109,6 +174,7 @@ body {
 
   input:checked + .track {
     background: var(--algo);
+    box-shadow: 0 0 12px -2px var(--algo);
 
     &::after {
       transform: translateX(16px);

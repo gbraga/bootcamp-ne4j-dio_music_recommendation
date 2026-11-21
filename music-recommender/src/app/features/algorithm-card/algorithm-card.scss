@@ -1,5 +1,7 @@
 :host {
   display: block;
+  /* Grid items default to min-width: auto; long Cypher tokens would push the card over its neighbour. */
+  min-width: 0;
 }
 
 .card {
@@ -9,26 +11,45 @@
   gap: 0.75rem;
   height: 100%;
   padding: 1rem;
-  background: var(--surface);
+  background:
+    radial-gradient(120% 45% at 50% 0%, var(--algo-soft), transparent 70%),
+    var(--surface);
   border: 1px solid var(--border);
-  border-top: 4px solid var(--algo);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(14px);
+  overflow: hidden;
+
+  /* Neon line on top of the card. */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 18% auto;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--algo);
+    box-shadow: 0 0 14px 2px var(--algo);
+  }
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, opacity 0.2s ease;
 
   &:not(.disabled):hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+    border-color: var(--algo);
+    box-shadow: 0 0 30px -10px var(--algo), var(--shadow-md);
   }
 
   &.highlighted {
-    background: linear-gradient(180deg, var(--algo-soft), var(--surface) 55%);
-    box-shadow: 0 0 0 2px var(--algo), var(--shadow-md);
+    border-color: var(--algo);
+    box-shadow: 0 0 0 1px var(--algo), 0 0 36px -6px var(--algo);
   }
 
   &.disabled {
-    border-top-color: var(--border);
-    opacity: 0.6;
+    opacity: 0.5;
+
+    &::before {
+      background: var(--text-subtle);
+      box-shadow: none;
+    }
 
     .dot {
       background: var(--text-subtle);
@@ -81,7 +102,7 @@ h3 {
   padding: 0.125rem 0.5rem;
   border-radius: 999px;
   background: var(--algo);
-  color: #fff;
+  color: var(--bg);
   font-size: 0.8rem;
   font-weight: 600;
   text-align: center;

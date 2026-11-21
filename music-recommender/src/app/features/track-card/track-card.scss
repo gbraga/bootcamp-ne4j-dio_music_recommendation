@@ -13,7 +13,7 @@
 
   .card {
     border-color: var(--algo);
-    box-shadow: 0 0 0 3px var(--algo-soft), var(--shadow-md);
+    box-shadow: 0 0 0 1px var(--algo), 0 0 24px -6px var(--algo);
   }
 }
 
@@ -22,14 +22,14 @@
   gap: 1rem;
   align-items: center;
   padding: 0.875rem;
-  background: var(--surface);
+  background: rgb(255 255 255 / 0.03);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 
   &:hover {
-    box-shadow: var(--shadow-md);
+    border-color: var(--border-strong);
+    background: rgb(255 255 255 / 0.05);
   }
 }
 
@@ -40,6 +40,7 @@
   width: 56px;
   height: 56px;
   border-radius: var(--radius-md);
+  box-shadow: 0 0 18px -6px rgb(168 85 247 / 0.8);
 
   svg {
     width: 24px;

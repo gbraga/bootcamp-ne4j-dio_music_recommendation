@@ -12,7 +12,7 @@
   min-width: min(100%, 320px);
 
   label {
-    color: rgb(255 255 255 / 0.75);
+    color: var(--text-muted);
     font-size: 0.75rem;
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -30,8 +30,8 @@
     right: 1rem;
     width: 8px;
     height: 8px;
-    border-right: 2px solid var(--text-muted);
-    border-bottom: 2px solid var(--text-muted);
+    border-right: 2px solid var(--brand);
+    border-bottom: 2px solid var(--brand);
     transform: translateY(-70%) rotate(45deg);
     pointer-events: none;
   }
@@ -40,17 +40,17 @@
     width: 100%;
     padding: 0.8rem 2.5rem 0.8rem 1rem;
     appearance: none;
-    border: 0;
-    border-radius: var(--radius-md);
-    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    background: var(--surface-solid);
     color: var(--text);
     font: inherit;
     font-weight: 500;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 0 24px -8px rgb(139 92 246 / 0.6);
     cursor: pointer;
 
     &:focus-visible {
-      outline: 3px solid rgb(255 255 255 / 0.5);
+      outline: 2px solid var(--brand-2);
     }
 
     &:disabled {
@@ -81,11 +81,11 @@
   gap: 0.75rem;
   align-items: center;
   padding: 0.5rem 1.25rem 0.5rem 0.5rem;
-  border: 1px solid rgb(255 255 255 / 0.2);
+  border: 1px solid var(--border);
   border-radius: 999px;
-  background: rgb(255 255 255 / 0.12);
+  background: var(--surface);
   backdrop-filter: blur(8px);
-  color: #fff;
+  color: var(--text);
 
   div {
     display: flex;
@@ -93,7 +93,7 @@
   }
 
   span:not(.avatar) {
-    color: rgb(255 255 255 / 0.75);
+    color: var(--text-muted);
     font-size: 0.8rem;
   }
 }
@@ -104,8 +104,9 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #fff;
-  color: var(--brand);
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  box-shadow: 0 0 14px rgb(236 72 153 / 0.6);
+  color: #fff;
   font-weight: 700;
   font-size: 0.85rem;
 }

@@ -27,12 +27,13 @@ export class Neo4jClient {
     return records.map((record) => record.toObject() as T);
   }
 
-  /** Runs each statement in its own auto-commit write (needed for schema changes). */
-  async write(cypher: string, params: QueryParams = {}): Promise<void> {
-    await this.getDriver().executeQuery(cypher, params, {
+  /** Runs a statement in its own auto-commit write transaction (also used for schema changes). */
+  async write<T = Record<string, unknown>>(cypher: string, params: QueryParams = {}): Promise<T[]> {
+    const { records } = await this.getDriver().executeQuery(cypher, params, {
       database: this.config.database,
       routing: neo4j.routing.WRITE,
     });
+    return records.map((record) => record.toObject() as T);
   }
 
   /** Runs all statements in a single transaction: either everything is written or nothing. */

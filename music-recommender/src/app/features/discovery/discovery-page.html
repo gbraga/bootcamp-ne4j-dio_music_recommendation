@@ -25,6 +25,7 @@
         [selected]="store.selectedUser()"
         [loadingMessage]="store.loadingMessage()"
         (selectedChange)="store.selectUser($event)"
+        (addRequested)="newUserOpen.set(true)"
       />
     }
   </div>
@@ -69,3 +70,9 @@
 
   <app-music-sidebar class="sidebar" id="musicas" />
 </div>
+
+<app-new-user-dialog
+  [open]="newUserOpen()"
+  (closed)="newUserOpen.set(false)"
+  (created)="onUserCreated($event)"
+/>

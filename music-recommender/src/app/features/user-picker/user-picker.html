@@ -1,17 +1,24 @@
 <div class="picker">
   <label for="user-select">Ouvinte</label>
-  <div class="select" [class.loading]="loadingMessage()">
-    <select
-      id="user-select"
-      [disabled]="!!loadingMessage()"
-      [value]="selected()?.userId ?? ''"
-      (change)="selectedChange.emit($any($event.target).value)"
-    >
-      <option value="" disabled>{{ loadingMessage() ?? 'Selecione um usuário…' }}</option>
-      @for (user of users(); track user.userId) {
-        <option [value]="user.userId">{{ flagOf(user.nationality) }} {{ user.name }}</option>
-      }
-    </select>
+  <div class="select-row">
+    <div class="select" [class.loading]="loadingMessage()">
+      <select
+        id="user-select"
+        [disabled]="!!loadingMessage()"
+        (change)="selectedChange.emit($any($event.target).value)"
+      >
+        <option value="" disabled [selected]="!selected()">{{ loadingMessage() ?? 'Selecione um usuário…' }}</option>
+        <!-- [selected] per option (not [value] on the select) also works for options added later. -->
+        @for (user of users(); track user.userId) {
+          <option [value]="user.userId" [selected]="user.userId === selected()?.userId">
+            {{ flagOf(user.nationality) }} {{ user.name }}
+          </option>
+        }
+      </select>
+    </div>
+    <button type="button" class="add" [disabled]="!!loadingMessage()" (click)="addRequested.emit()">
+      <span aria-hidden="true">＋</span> Novo ouvinte
+    </button>
   </div>
 </div>
 

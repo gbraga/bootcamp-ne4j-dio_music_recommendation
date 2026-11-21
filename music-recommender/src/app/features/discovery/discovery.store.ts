@@ -1,10 +1,11 @@
 import { Injectable, computed, inject, linkedSignal, resource, signal } from '@angular/core';
 import { DatabaseSeeder } from '../../data/seed/database-seeder';
 import { ListeningService } from '../../domain/listening.service';
-import { AlgorithmId, CandidatePool } from '../../domain/models';
+import { AlgorithmId, CandidatePool, User } from '../../domain/models';
 import { ALL_ALGORITHM_IDS, CUSTOM_ALGORITHM } from '../../domain/recommendation-algorithms';
 import { unionRecommendations } from '../../domain/recommendation-union';
 import { RecommendationService } from '../../domain/recommendation.service';
+import { UserService } from '../../domain/user.service';
 
 const CUSTOM_CYPHER_KEY = 'graph-music.custom-cypher';
 const EMPTY_POOL: CandidatePool = { candidates: [], tracks: [] };
@@ -13,6 +14,7 @@ const EMPTY_POOL: CandidatePool = { candidates: [], tracks: [] };
 @Injectable()
 export class DiscoveryStore {
   private readonly database = inject(DatabaseSeeder);
+  private readonly userService = inject(UserService);
   private readonly listening = inject(ListeningService);
   private readonly recommender = inject(RecommendationService);
 
@@ -27,12 +29,16 @@ export class DiscoveryStore {
   readonly users = resource({
     loader: async () => {
       await this.database.ensureSeeded();
-      return this.listening.getUsers();
+      return this.userService.getUsers();
     },
   });
 
-  /** Starts with the first user so the page opens with data; the picker overrides it. */
-  readonly selectedUserId = linkedSignal<string | undefined>(() => this.users.value()?.[0]?.userId);
+  /** Starts with the first user and keeps the current choice while it still exists in the list. */
+  readonly selectedUserId = linkedSignal<User[] | undefined, string | undefined>({
+    source: () => this.users.value(),
+    computation: (users, previous) =>
+      users?.some((user) => user.userId === previous?.value) ? previous!.value : users?.[0]?.userId,
+  });
 
   readonly history = resource({
     params: () => this.selectedUserId(),
@@ -93,6 +99,14 @@ export class DiscoveryStore {
   selectUser(userId: string): void {
     this.highlightedAlgorithm.set(null);
     this.selectedUserId.set(userId || undefined);
+  }
+
+  /** Adds a freshly created user to the list (no refetch) and selects it. */
+  addUser(user: User): void {
+    this.users.update((users) =>
+      [...(users ?? []), user].sort((a, b) => a.name.localeCompare(b.name, 'pt-BR')),
+    );
+    this.selectUser(user.userId);
   }
 
   toggleHighlight(id: AlgorithmId): void {

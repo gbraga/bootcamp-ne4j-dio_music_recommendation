@@ -13,6 +13,7 @@ export class UserPicker {
   readonly selected = input<User | undefined>();
   readonly loadingMessage = input<string | null>(null);
   readonly selectedChange = output<string>();
+  readonly addRequested = output<void>();
 
   protected readonly flagOf = flagOf;
   protected readonly initialsOf = initialsOf;

@@ -1,0 +1,66 @@
+<dialog
+  #dialog
+  aria-labelledby="new-user-title"
+  (cancel)="$event.preventDefault(); closed.emit()"
+  (close)="open() && closed.emit()"
+  (click)="onDialogClick($event)"
+>
+  <form class="panel" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <header>
+      <span class="mark" aria-hidden="true">＋</span>
+      <div>
+        <h2 id="new-user-title">Novo ouvinte</h2>
+        <p>Cria um nó <code>:User</code> ligado à sua <code>:Nationality</code> no AuraDB.</p>
+      </div>
+      <button type="button" class="close" aria-label="Fechar" [disabled]="saving()" (click)="closed.emit()">✕</button>
+    </header>
+
+    <label class="field">
+      <span>Nome</span>
+      <input type="text" formControlName="name" autocomplete="off" placeholder="Ex.: Marina Duarte" maxlength="60" />
+      @if (showError('name')) {
+        <small class="invalid">Informe um nome com 2 a 60 caracteres.</small>
+      }
+    </label>
+
+    <div class="row">
+      <label class="field">
+        <span>Idade</span>
+        <input type="number" formControlName="age" [min]="ageRange.min" [max]="ageRange.max" step="1" />
+        @if (showError('age')) {
+          <small class="invalid">Entre {{ ageRange.min }} e {{ ageRange.max }} anos.</small>
+        }
+      </label>
+
+      <label class="field grow">
+        <span>Nacionalidade</span>
+        <select formControlName="nationalityId">
+          <option value="" disabled>
+            {{ nationalities.isLoading() ? 'Carregando…' : 'Selecione…' }}
+          </option>
+          @for (nationality of nationalities.value() ?? []; track nationality.nationalityId) {
+            <option [value]="nationality.nationalityId">{{ flagOf(nationality.name) }} {{ nationality.name }}</option>
+          }
+        </select>
+        @if (showError('nationalityId')) {
+          <small class="invalid">Escolha uma nacionalidade.</small>
+        }
+      </label>
+    </div>
+
+    @if (error() || nationalities.error()) {
+      <p class="alert" role="alert">{{ error() ?? 'Não foi possível carregar as nacionalidades.' }}</p>
+    }
+
+    <footer>
+      <button type="button" class="ghost" [disabled]="saving()" (click)="closed.emit()">Cancelar</button>
+      <button type="submit" class="primary" [disabled]="saving()">
+        @if (saving()) {
+          <span class="spinner" aria-hidden="true"></span> Salvando…
+        } @else {
+          Adicionar ouvinte
+        }
+      </button>
+    </footer>
+  </form>
+</dialog>

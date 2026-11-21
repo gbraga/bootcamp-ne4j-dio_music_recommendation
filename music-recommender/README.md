@@ -81,6 +81,14 @@ Músicas que o usuário já ouviu são sempre excluídas; músicas sugeridas por
 
 Clicar em um card de algoritmo destaca, no painel de recomendações, as músicas que vieram dele.
 
+### Novo ouvinte
+
+O botão **＋ Novo ouvinte** (ao lado do seletor) abre um dialog com nome, idade (10–110) e nacionalidade.
+Ao salvar, [`create-user.cypher`](src/app/data/queries/create-user.cypher) cria o nó `:User` (com `userId`
+aleatório de 10 caracteres, no mesmo formato dos CSVs) ligado à `:Nationality` via `BORN_IN`, e o novo
+ouvinte já fica selecionado. Ele é gravado apenas no AuraDB — `npm run seed` recria o banco a partir dos
+CSVs e o remove.
+
 ### Seu algoritmo (card custom)
 
 O primeiro card permite escrever e executar o seu próprio algoritmo em Cypher (**Executar** ou `Ctrl+Enter`).

@@ -5,6 +5,17 @@ export interface User {
   nationality: string | null;
 }
 
+export interface Nationality {
+  nationalityId: string;
+  name: string;
+}
+
+export interface NewUser {
+  name: string;
+  age: number;
+  nationalityId: string;
+}
+
 export interface Track {
   trackId: string;
   name: string;

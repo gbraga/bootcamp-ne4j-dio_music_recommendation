@@ -6,10 +6,14 @@ import recommendFromArtists from './recommend-from-artists.cypher';
 import recommendTopTracks from './recommend-top-tracks.cypher';
 import recommendLikedGenres from './recommend-liked-genres.cypher';
 import customExample from './custom-example.cypher';
+import nationalities from './nationalities.cypher';
+import createUser from './create-user.cypher';
 
 /** Cypher queries live in .cypher files and are bundled as plain text. */
 export const Queries = {
   users,
+  nationalities,
+  createUser,
   listeningHistory,
   trackDetails,
   recommendSameAge,

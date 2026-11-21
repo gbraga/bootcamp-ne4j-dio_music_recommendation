@@ -164,7 +164,8 @@ h3 {
   textarea {
     box-sizing: border-box;
     margin: 0;
-    padding: 0.875rem 1rem;
+    /* Right padding leaves room for the copy button. */
+    padding: 0.875rem 2.75rem 0.875rem 1rem;
     border: 0;
     font: 0.8rem/1.6 var(--font-mono);
     letter-spacing: normal;
@@ -195,6 +196,14 @@ h3 {
       background: rgb(255 255 255 / 0.25);
     }
   }
+}
+
+/* Above the textarea, which covers the whole editor. */
+.copy {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 1;
 }
 
 .error {

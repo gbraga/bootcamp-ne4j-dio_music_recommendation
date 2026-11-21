@@ -44,6 +44,7 @@
           (input)="draft.set($any($event.target).value)"
           (keydown)="onKeydown($event)"
         ></textarea>
+        <app-copy-button class="copy" [text]="draft()" label="Copiar Cypher do seu algoritmo" />
       </div>
 
       @if (error()) {

@@ -114,10 +114,25 @@ h3 {
   font-size: 0.85rem;
 }
 
+.code {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+/* Sits above the full-card .hit-area so it gets its own clicks. */
+.copy {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  z-index: 1;
+}
+
 .cypher {
   flex: 1;
   margin: 0;
-  padding: 0.75rem;
+  padding: 0.75rem 2.5rem 0.75rem 0.75rem;
   white-space: pre-wrap;
   overflow-wrap: break-word;
   border-radius: var(--radius-md);

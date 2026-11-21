@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { RecommendationAlgorithm } from '../../domain/models';
+import { CopyButton } from '../../shared/copy-button';
 import { highlightCypher } from '../../shared/cypher-highlight';
 
 @Component({
   selector: 'app-algorithm-card',
   templateUrl: './algorithm-card.html',
   styleUrl: './algorithm-card.scss',
+  imports: [CopyButton],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[attr.data-algorithm]': 'algorithm().id' },
 })

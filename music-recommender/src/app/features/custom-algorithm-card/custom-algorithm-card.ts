@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, input, linkedSignal, output, signal } from '@angular/core';
 import { RecommendationAlgorithm } from '../../domain/models';
+import { CopyButton } from '../../shared/copy-button';
 import { highlightCypher } from '../../shared/cypher-highlight';
 
 const EXPANDED_KEY = 'graph-music.custom-expanded';
@@ -8,6 +9,7 @@ const EXPANDED_KEY = 'graph-music.custom-expanded';
   selector: 'app-custom-algorithm-card',
   templateUrl: './custom-algorithm-card.html',
   styleUrl: './custom-algorithm-card.scss',
+  imports: [CopyButton],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: { '[attr.data-algorithm]': 'algorithm().id' },
 })

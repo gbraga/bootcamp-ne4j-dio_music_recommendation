@@ -1,0 +1,1227 @@
+{
+  "version": "1.4.0-beta.0",
+  "graph": {
+    "nodes": [
+      {
+        "id": "n0",
+        "position": {
+          "x": 475.83333333333337,
+          "y": 35
+        },
+        "caption": "User"
+      },
+      {
+        "id": "n1",
+        "position": {
+          "x": 40,
+          "y": 219.16666666666669
+        },
+        "caption": "Genre"
+      },
+      {
+        "id": "n2",
+        "position": {
+          "x": 240,
+          "y": 40
+        },
+        "caption": "Track"
+      },
+      {
+        "id": "n3",
+        "position": {
+          "x": -102.5,
+          "y": 42.5
+        },
+        "caption": "Artist"
+      },
+      {
+        "id": "n4",
+        "position": {
+          "x": 180,
+          "y": -180
+        },
+        "caption": "Nationality"
+      }
+    ],
+    "relationships": [
+      {
+        "id": "n0",
+        "type": "BELONGS_TO",
+        "fromId": "n2",
+        "toId": "n1"
+      },
+      {
+        "id": "n1",
+        "type": "LISTENED_TO",
+        "fromId": "n0",
+        "toId": "n2"
+      },
+      {
+        "id": "n2",
+        "type": "PRODUCES",
+        "fromId": "n3",
+        "toId": "n2"
+      },
+      {
+        "id": "n3",
+        "type": "FEATURED_IN",
+        "fromId": "n3",
+        "toId": "n2"
+      },
+      {
+        "id": "n4",
+        "type": "BORN_IN",
+        "fromId": "n3",
+        "toId": "n4"
+      },
+      {
+        "id": "n5",
+        "type": "BORN_IN",
+        "fromId": "n0",
+        "toId": "n4"
+      }
+    ]
+  },
+  "dataModel": {
+    "version": "1.4.0-beta.0",
+    "graphSchemaRepresentation": {
+      "version": "1.0.0",
+      "graphSchema": {
+        "nodeLabels": [
+          {
+            "$id": "nl:n0",
+            "token": "User",
+            "properties": [
+              {
+                "$id": "p:1",
+                "token": "name",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:2",
+                "token": "age",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:3",
+                "token": "userId",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              }
+            ]
+          },
+          {
+            "$id": "nl:n1",
+            "token": "Genre",
+            "properties": [
+              {
+                "$id": "p:5",
+                "token": "name",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:6",
+                "token": "genreId",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              }
+            ]
+          },
+          {
+            "$id": "nl:n2",
+            "token": "Track",
+            "properties": [
+              {
+                "$id": "p:7",
+                "token": "duration",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:8",
+                "token": "trackId",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:17",
+                "token": "name",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:9",
+                "token": "release",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": true
+              }
+            ]
+          },
+          {
+            "$id": "nl:n3",
+            "token": "Artist",
+            "properties": [
+              {
+                "$id": "p:10",
+                "token": "age",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:12",
+                "token": "name",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:13",
+                "token": "artistId",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              }
+            ]
+          },
+          {
+            "$id": "nl:n4",
+            "token": "Nationality",
+            "properties": [
+              {
+                "$id": "p:18",
+                "token": "name",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:19",
+                "token": "nationalityId",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              }
+            ]
+          }
+        ],
+        "relationshipTypes": [
+          {
+            "$id": "rt:n0",
+            "token": "BELONGS_TO",
+            "properties": []
+          },
+          {
+            "$id": "rt:n1",
+            "token": "LISTENED_TO",
+            "properties": [
+              {
+                "$id": "p:14",
+                "token": "liked",
+                "type": {
+                  "type": "boolean"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:15",
+                "token": "listenDate",
+                "type": {
+                  "type": "datetime"
+                },
+                "nullable": true
+              },
+              {
+                "$id": "p:16",
+                "token": "timesListened",
+                "type": {
+                  "type": "integer"
+                },
+                "nullable": true
+              }
+            ]
+          },
+          {
+            "$id": "rt:n2",
+            "token": "PRODUCES",
+            "properties": []
+          },
+          {
+            "$id": "rt:n3",
+            "token": "FEATURED_IN",
+            "properties": []
+          },
+          {
+            "$id": "rt:n4",
+            "token": "BORN_IN",
+            "properties": []
+          }
+        ],
+        "nodeObjectTypes": [
+          {
+            "$id": "n:n0",
+            "labels": [
+              {
+                "$ref": "#nl:n0"
+              }
+            ]
+          },
+          {
+            "$id": "n:n1",
+            "labels": [
+              {
+                "$ref": "#nl:n1"
+              }
+            ]
+          },
+          {
+            "$id": "n:n2",
+            "labels": [
+              {
+                "$ref": "#nl:n2"
+              }
+            ]
+          },
+          {
+            "$id": "n:n3",
+            "labels": [
+              {
+                "$ref": "#nl:n3"
+              }
+            ]
+          },
+          {
+            "$id": "n:n4",
+            "labels": [
+              {
+                "$ref": "#nl:n4"
+              }
+            ]
+          }
+        ],
+        "relationshipObjectTypes": [
+          {
+            "$id": "r:n0",
+            "type": {
+              "$ref": "#rt:n0"
+            },
+            "from": {
+              "$ref": "#n:n2"
+            },
+            "to": {
+              "$ref": "#n:n1"
+            }
+          },
+          {
+            "$id": "r:n1",
+            "type": {
+              "$ref": "#rt:n1"
+            },
+            "from": {
+              "$ref": "#n:n0"
+            },
+            "to": {
+              "$ref": "#n:n2"
+            }
+          },
+          {
+            "$id": "r:n2",
+            "type": {
+              "$ref": "#rt:n2"
+            },
+            "from": {
+              "$ref": "#n:n3"
+            },
+            "to": {
+              "$ref": "#n:n2"
+            }
+          },
+          {
+            "$id": "r:n3",
+            "type": {
+              "$ref": "#rt:n3"
+            },
+            "from": {
+              "$ref": "#n:n3"
+            },
+            "to": {
+              "$ref": "#n:n2"
+            }
+          },
+          {
+            "$id": "r:n4",
+            "type": {
+              "$ref": "#rt:n4"
+            },
+            "from": {
+              "$ref": "#n:n3"
+            },
+            "to": {
+              "$ref": "#n:n4"
+            }
+          },
+          {
+            "$id": "r:n5",
+            "type": {
+              "$ref": "#rt:n4"
+            },
+            "from": {
+              "$ref": "#n:n0"
+            },
+            "to": {
+              "$ref": "#n:n4"
+            }
+          }
+        ],
+        "constraints": [
+          {
+            "$id": "c:1",
+            "name": "userId_User_uniq",
+            "constraintType": "uniqueness",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n0"
+            },
+            "properties": [
+              {
+                "$ref": "#p:3"
+              }
+            ]
+          },
+          {
+            "$id": "c:2",
+            "name": "name_User_exists",
+            "constraintType": "existence",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n0"
+            },
+            "properties": [
+              {
+                "$ref": "#p:1"
+              }
+            ]
+          },
+          {
+            "$id": "c:3",
+            "name": "userId_User_exists",
+            "constraintType": "existence",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n0"
+            },
+            "properties": [
+              {
+                "$ref": "#p:3"
+              }
+            ]
+          },
+          {
+            "$id": "c:4",
+            "name": "genreId_Genre_uniq",
+            "constraintType": "uniqueness",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n1"
+            },
+            "properties": [
+              {
+                "$ref": "#p:6"
+              }
+            ]
+          },
+          {
+            "$id": "c:5",
+            "name": "name_Genre_exists",
+            "constraintType": "existence",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n1"
+            },
+            "properties": [
+              {
+                "$ref": "#p:5"
+              }
+            ]
+          },
+          {
+            "$id": "c:6",
+            "name": "genreId_Genre_exists",
+            "constraintType": "existence",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n1"
+            },
+            "properties": [
+              {
+                "$ref": "#p:6"
+              }
+            ]
+          },
+          {
+            "$id": "c:7",
+            "name": "trackId_Track_uniq",
+            "constraintType": "uniqueness",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n2"
+            },
+            "properties": [
+              {
+                "$ref": "#p:8"
+              }
+            ]
+          },
+          {
+            "$id": "c:8",
+            "name": "trackId_Track_exists",
+            "constraintType": "existence",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n2"
+            },
+            "properties": [
+              {
+                "$ref": "#p:8"
+              }
+            ]
+          },
+          {
+            "$id": "c:9",
+            "name": "artistId_Artist_uniq",
+            "constraintType": "uniqueness",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n3"
+            },
+            "properties": [
+              {
+                "$ref": "#p:13"
+              }
+            ]
+          },
+          {
+            "$id": "c:10",
+            "name": "name_Artist_exists",
+            "constraintType": "existence",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n3"
+            },
+            "properties": [
+              {
+                "$ref": "#p:12"
+              }
+            ]
+          },
+          {
+            "$id": "c:11",
+            "name": "artistId_Artist_exists",
+            "constraintType": "existence",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n3"
+            },
+            "properties": [
+              {
+                "$ref": "#p:13"
+              }
+            ]
+          },
+          {
+            "$id": "c:12",
+            "name": "nationalityId_Nationality_uniq",
+            "constraintType": "uniqueness",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n4"
+            },
+            "properties": [
+              {
+                "$ref": "#p:19"
+              }
+            ]
+          },
+          {
+            "$id": "c:13",
+            "name": "name_Nationality_exists",
+            "constraintType": "existence",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n4"
+            },
+            "properties": [
+              {
+                "$ref": "#p:18"
+              }
+            ]
+          },
+          {
+            "$id": "c:14",
+            "name": "nationalityId_Nationality_exists",
+            "constraintType": "existence",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n4"
+            },
+            "properties": [
+              {
+                "$ref": "#p:19"
+              }
+            ]
+          }
+        ],
+        "indexes": [
+          {
+            "$id": "i:1",
+            "name": "userId_User_uniq",
+            "indexType": "default",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n0"
+            },
+            "properties": [
+              {
+                "$ref": "#p:3"
+              }
+            ]
+          },
+          {
+            "$id": "i:2",
+            "name": "genreId_Genre_uniq",
+            "indexType": "default",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n1"
+            },
+            "properties": [
+              {
+                "$ref": "#p:6"
+              }
+            ]
+          },
+          {
+            "$id": "i:3",
+            "name": "trackId_Track_uniq",
+            "indexType": "default",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n2"
+            },
+            "properties": [
+              {
+                "$ref": "#p:8"
+              }
+            ]
+          },
+          {
+            "$id": "i:4",
+            "name": "artistId_Artist_uniq",
+            "indexType": "default",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n3"
+            },
+            "properties": [
+              {
+                "$ref": "#p:13"
+              }
+            ]
+          },
+          {
+            "$id": "i:5",
+            "name": "nationalityId_Nationality_uniq",
+            "indexType": "default",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:n4"
+            },
+            "properties": [
+              {
+                "$ref": "#p:19"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "graphSchemaExtensionsRepresentation": {
+      "nodeKeyProperties": [
+        {
+          "node": {
+            "$ref": "#n:n0"
+          },
+          "keyProperty": {
+            "$ref": "#p:3"
+          }
+        },
+        {
+          "node": {
+            "$ref": "#n:n1"
+          },
+          "keyProperty": {
+            "$ref": "#p:6"
+          }
+        },
+        {
+          "node": {
+            "$ref": "#n:n2"
+          },
+          "keyProperty": {
+            "$ref": "#p:8"
+          }
+        },
+        {
+          "node": {
+            "$ref": "#n:n3"
+          },
+          "keyProperty": {
+            "$ref": "#p:13"
+          }
+        },
+        {
+          "node": {
+            "$ref": "#n:n4"
+          },
+          "keyProperty": {
+            "$ref": "#p:19"
+          }
+        }
+      ]
+    },
+    "graphMappingRepresentation": {
+      "dataSourceSchema": {
+        "type": "local/csv",
+        "tableSchemas": [
+          {
+            "$id": "t:1",
+            "name": "users.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "user_name",
+                "type": "string",
+                "sample": "Ana Beatriz Souza",
+                "include": true
+              },
+              {
+                "name": "user_age",
+                "type": "integer",
+                "sample": "65",
+                "include": true
+              },
+              {
+                "name": "userId",
+                "type": "string",
+                "sample": "ZK904LNylb",
+                "include": true
+              }
+            ]
+          },
+          {
+            "$id": "t:2",
+            "name": "genres.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "genre_name",
+                "type": "string",
+                "sample": "Rock",
+                "include": true
+              },
+              {
+                "name": "genreId",
+                "type": "string",
+                "sample": "kgAtIcWUg9",
+                "include": true
+              }
+            ]
+          },
+          {
+            "$id": "t:3",
+            "name": "tracks.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "duration",
+                "type": "integer",
+                "sample": "194",
+                "include": true
+              },
+              {
+                "name": "trackId",
+                "type": "string",
+                "sample": "R1uguOvNdp",
+                "include": true
+              },
+              {
+                "name": "name",
+                "type": "string",
+                "sample": "Bad Guy",
+                "include": true
+              },
+              {
+                "name": "release",
+                "type": "string",
+                "sample": "2019-03-29",
+                "include": true
+              }
+            ]
+          },
+          {
+            "$id": "t:4",
+            "name": "artists.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "artist_age",
+                "type": "integer",
+                "sample": "84",
+                "include": true
+              },
+              {
+                "name": "artist_name",
+                "type": "string",
+                "sample": "Caetano Veloso",
+                "include": true
+              },
+              {
+                "name": "artistId",
+                "type": "string",
+                "sample": "B30Q54HxnT",
+                "include": true
+              }
+            ]
+          },
+          {
+            "$id": "t:5",
+            "name": "belongs_to.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "genreId",
+                "type": "string",
+                "sample": "tIL3PLeAN6",
+                "include": true
+              },
+              {
+                "name": "trackId",
+                "type": "string",
+                "sample": "R1uguOvNdp",
+                "include": true
+              }
+            ]
+          },
+          {
+            "$id": "t:6",
+            "name": "listened_to.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "trackId",
+                "type": "string",
+                "sample": "9axhElNKGQ",
+                "include": true
+              },
+              {
+                "name": "userId",
+                "type": "string",
+                "sample": "ZK904LNylb",
+                "include": true
+              },
+              {
+                "name": "liked",
+                "type": "boolean",
+                "sample": "true",
+                "include": true
+              },
+              {
+                "name": "listenDate",
+                "type": "datetime",
+                "sample": "2013-08-17T03:33:38.577Z",
+                "include": true
+              },
+              {
+                "name": "timesListened",
+                "type": "integer",
+                "sample": "18",
+                "include": true
+              }
+            ]
+          },
+          {
+            "$id": "t:7",
+            "name": "produces.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "trackId",
+                "type": "string",
+                "sample": "R1uguOvNdp",
+                "include": true
+              },
+              {
+                "name": "artistId",
+                "type": "string",
+                "sample": "fjpggFkbUX",
+                "include": true
+              }
+            ]
+          },
+          {
+            "$id": "t:8",
+            "name": "featured_in.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "trackId",
+                "type": "string",
+                "sample": "f3uSIFFLpW",
+                "include": true
+              },
+              {
+                "name": "artistId",
+                "type": "string",
+                "sample": "4a2z6eq3ni",
+                "include": true
+              }
+            ]
+          },
+          {
+            "$id": "t:9",
+            "name": "nationality.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "nationality_name",
+                "type": "string",
+                "sample": "Brasileira",
+                "include": true
+              },
+              {
+                "name": "nationalityId",
+                "type": "string",
+                "sample": "0MjXGcKeF8",
+                "include": true
+              }
+            ]
+          },
+          {
+            "$id": "t:10",
+            "name": "artist_born_in.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "artistId",
+                "type": "string",
+                "sample": "B30Q54HxnT",
+                "include": true
+              },
+              {
+                "name": "nationalityId",
+                "type": "string",
+                "sample": "0MjXGcKeF8",
+                "include": true
+              }
+            ]
+          },
+          {
+            "$id": "t:11",
+            "name": "user_born_in.csv",
+            "expanded": true,
+            "fields": [
+              {
+                "name": "userId",
+                "type": "string",
+                "sample": "ZK904LNylb",
+                "include": true
+              },
+              {
+                "name": "nationalityId",
+                "type": "string",
+                "sample": "0MjXGcKeF8",
+                "include": true
+              }
+            ]
+          }
+        ]
+      },
+      "nodeMappings": [
+        {
+          "node": {
+            "$ref": "#n:n0"
+          },
+          "tableSchema": {
+            "$ref": "#t:1"
+          },
+          "propertyMappings": [
+            {
+              "fieldName": "user_name",
+              "property": {
+                "$ref": "#p:1"
+              }
+            },
+            {
+              "fieldName": "user_age",
+              "property": {
+                "$ref": "#p:2"
+              }
+            },
+            {
+              "fieldName": "userId",
+              "property": {
+                "$ref": "#p:3"
+              }
+            }
+          ]
+        },
+        {
+          "node": {
+            "$ref": "#n:n1"
+          },
+          "tableSchema": {
+            "$ref": "#t:2"
+          },
+          "propertyMappings": [
+            {
+              "fieldName": "genre_name",
+              "property": {
+                "$ref": "#p:5"
+              }
+            },
+            {
+              "fieldName": "genreId",
+              "property": {
+                "$ref": "#p:6"
+              }
+            }
+          ]
+        },
+        {
+          "node": {
+            "$ref": "#n:n2"
+          },
+          "tableSchema": {
+            "$ref": "#t:3"
+          },
+          "propertyMappings": [
+            {
+              "fieldName": "duration",
+              "property": {
+                "$ref": "#p:7"
+              }
+            },
+            {
+              "fieldName": "trackId",
+              "property": {
+                "$ref": "#p:8"
+              }
+            },
+            {
+              "fieldName": "name",
+              "property": {
+                "$ref": "#p:17"
+              }
+            },
+            {
+              "fieldName": "release",
+              "property": {
+                "$ref": "#p:9"
+              }
+            }
+          ]
+        },
+        {
+          "node": {
+            "$ref": "#n:n3"
+          },
+          "tableSchema": {
+            "$ref": "#t:4"
+          },
+          "propertyMappings": [
+            {
+              "fieldName": "artist_age",
+              "property": {
+                "$ref": "#p:10"
+              }
+            },
+            {
+              "fieldName": "artist_name",
+              "property": {
+                "$ref": "#p:12"
+              }
+            },
+            {
+              "fieldName": "artistId",
+              "property": {
+                "$ref": "#p:13"
+              }
+            }
+          ]
+        },
+        {
+          "node": {
+            "$ref": "#n:n4"
+          },
+          "tableSchema": {
+            "$ref": "#t:9"
+          },
+          "propertyMappings": [
+            {
+              "fieldName": "nationality_name",
+              "property": {
+                "$ref": "#p:18"
+              }
+            },
+            {
+              "fieldName": "nationalityId",
+              "property": {
+                "$ref": "#p:19"
+              }
+            }
+          ]
+        }
+      ],
+      "relationshipMappings": [
+        {
+          "relationship": {
+            "$ref": "#r:n0"
+          },
+          "tableSchema": {
+            "$ref": "#t:5"
+          },
+          "propertyMappings": [],
+          "fromMapping": {
+            "fieldName": "trackId"
+          },
+          "toMapping": {
+            "fieldName": "genreId"
+          }
+        },
+        {
+          "relationship": {
+            "$ref": "#r:n1"
+          },
+          "tableSchema": {
+            "$ref": "#t:6"
+          },
+          "propertyMappings": [
+            {
+              "fieldName": "liked",
+              "property": {
+                "$ref": "#p:14"
+              }
+            },
+            {
+              "fieldName": "listenDate",
+              "property": {
+                "$ref": "#p:15"
+              }
+            },
+            {
+              "fieldName": "timesListened",
+              "property": {
+                "$ref": "#p:16"
+              }
+            }
+          ],
+          "fromMapping": {
+            "fieldName": "userId"
+          },
+          "toMapping": {
+            "fieldName": "trackId"
+          }
+        },
+        {
+          "relationship": {
+            "$ref": "#r:n2"
+          },
+          "tableSchema": {
+            "$ref": "#t:7"
+          },
+          "propertyMappings": [],
+          "fromMapping": {
+            "fieldName": "artistId"
+          },
+          "toMapping": {
+            "fieldName": "trackId"
+          }
+        },
+        {
+          "relationship": {
+            "$ref": "#r:n3"
+          },
+          "tableSchema": {
+            "$ref": "#t:8"
+          },
+          "propertyMappings": [],
+          "fromMapping": {
+            "fieldName": "artistId"
+          },
+          "toMapping": {
+            "fieldName": "trackId"
+          }
+        },
+        {
+          "relationship": {
+            "$ref": "#r:n4"
+          },
+          "tableSchema": {
+            "$ref": "#t:10"
+          },
+          "propertyMappings": [],
+          "fromMapping": {
+            "fieldName": "artistId"
+          },
+          "toMapping": {
+            "fieldName": "nationalityId"
+          }
+        },
+        {
+          "relationship": {
+            "$ref": "#r:n5"
+          },
+          "tableSchema": {
+            "$ref": "#t:11"
+          },
+          "propertyMappings": [],
+          "fromMapping": {
+            "fieldName": "userId"
+          },
+          "toMapping": {
+            "fieldName": "nationalityId"
+          }
+        }
+      ]
+    },
+    "configurations": {
+      "idsToIgnore": []
+    }
+  }
+}

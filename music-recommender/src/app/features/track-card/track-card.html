@@ -1,0 +1,24 @@
+<article class="card">
+  <div class="cover" [style.background]="cover()" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm12-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+  </div>
+
+  <div class="body">
+    <h3 class="title" [title]="track().name">{{ track().name }}</h3>
+    <p class="artists">
+      {{ track().artists.join(', ') }}
+      @if (track().featuring.length) {
+        <span class="feat">feat. {{ track().featuring.join(', ') }}</span>
+      }
+    </p>
+    <p class="meta">
+      {{ year() }} · {{ track().duration | duration }}
+      @for (genre of track().genres; track genre) {
+        <span class="genre">{{ genre }}</span>
+      }
+    </p>
+    <ng-content />
+  </div>
+
+  <ng-content select="[trackAside]" />
+</article>

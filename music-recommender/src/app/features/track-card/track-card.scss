@@ -1,0 +1,93 @@
+:host {
+  display: block;
+  transition: opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease;
+}
+
+:host([data-state='dimmed']) {
+  opacity: 0.35;
+  filter: grayscale(0.6);
+}
+
+:host([data-state='highlighted']) {
+  transform: translateY(-2px);
+
+  .card {
+    border-color: var(--algo);
+    box-shadow: 0 0 0 3px var(--algo-soft), var(--shadow-md);
+  }
+}
+
+.card {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.875rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.cover {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+
+  svg {
+    width: 24px;
+    fill: none;
+    stroke: rgb(255 255 255 / 0.9);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 0.975rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artists {
+  margin: 0.125rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.feat {
+  color: var(--text-subtle);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  align-items: center;
+  margin: 0.375rem 0 0;
+  color: var(--text-subtle);
+  font-size: 0.75rem;
+}
+
+.genre {
+  padding: 0.0625rem 0.5rem;
+  border-radius: 999px;
+  background: var(--surface-muted);
+  color: var(--text-muted);
+}

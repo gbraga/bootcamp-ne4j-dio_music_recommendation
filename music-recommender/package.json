@@ -1,0 +1,39 @@
+{
+  "name": "music-recommender",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "setup": "node scripts/generate-env.mjs && node scripts/sync-datasets.mjs",
+    "prestart": "npm run setup",
+    "start": "ng serve",
+    "prebuild": "npm run setup",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "seed": "node scripts/seed-database.mjs",
+    "test": "ng test"
+  },
+  "private": true,
+  "packageManager": "npm@11.19.1",
+  "dependencies": {
+    "@angular/common": "^22.3.0",
+    "@angular/compiler": "^22.3.0",
+    "@angular/core": "^22.3.0",
+    "@angular/forms": "^22.3.0",
+    "@angular/platform-browser": "^22.3.0",
+    "@angular/router": "^22.3.0",
+    "csv-parse": "^7.0.3",
+    "neo4j-driver": "^6.3.2",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.3.0",
+    "@angular/cli": "^22.3.0",
+    "@angular/compiler-cli": "^22.3.0",
+    "dotenv": "^18.0.10",
+    "jsdom": "^31.0.0",
+    "prettier": "^3.8.1",
+    "typescript": "~6.0.2",
+    "vitest": "^5.0.0"
+  }
+}

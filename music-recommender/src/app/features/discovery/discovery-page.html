@@ -1,0 +1,120 @@
+<header class="hero">
+  <div class="container">
+    <p class="brand"><span class="logo" aria-hidden="true">♪</span> Graph Music · Neo4j AuraDB</p>
+    <h1>Descubra o que ouvir a seguir</h1>
+    <p class="lead">Recomendações geradas a partir do grafo de ouvintes, artistas e músicas.</p>
+
+    @if (store.users.error()) {
+      <p class="alert">Não foi possível conectar ao Neo4j. Verifique o .env e se a instância AuraDB está ativa.</p>
+    } @else {
+      <app-user-picker
+        [users]="store.users.value() ?? []"
+        [selected]="store.selectedUser()"
+        [loadingMessage]="store.loadingMessage()"
+        (selectedChange)="store.selectUser($event)"
+      />
+    }
+  </div>
+</header>
+
+<main class="container">
+  <section aria-labelledby="algorithms-title">
+    <div class="section-head">
+      <h2 id="algorithms-title">Como recomendamos</h2>
+      <p>As recomendações são a união destes três algoritmos. Clique em um deles para destacar suas músicas.</p>
+    </div>
+    <div class="algorithms">
+      @for (algorithm of algorithms; track algorithm.id) {
+        <app-algorithm-card
+          [algorithm]="algorithm"
+          [count]="store.selectedUserId() && store.recommendations.hasValue() ? store.countByAlgorithm()[algorithm.id] : null"
+          [active]="store.activeAlgorithm() === algorithm.id"
+          (toggled)="store.toggleAlgorithm(algorithm.id)"
+        />
+      }
+    </div>
+  </section>
+
+  @if (store.users.isLoading()) {
+    <section class="empty">
+      <span aria-hidden="true">⏳</span>
+      <h2>Preparando o grafo</h2>
+      <p>{{ store.loadingMessage() }}</p>
+    </section>
+  } @else if (!store.selectedUserId()) {
+    <section class="empty">
+      <span aria-hidden="true">🎧</span>
+      <h2>Escolha um ouvinte</h2>
+      <p>Selecione um usuário acima para ver o histórico e as recomendações dele.</p>
+    </section>
+  } @else {
+    <div class="panels">
+      <section class="panel" aria-labelledby="history-title">
+        <div class="panel-head">
+          <h2 id="history-title">Já ouviu</h2>
+          @if (store.history.hasValue()) {
+            <span class="pill">{{ store.history.value().length }}</span>
+          }
+        </div>
+
+        @if (store.history.isLoading()) {
+          <div class="skeletons">@for (i of [1, 2, 3]; track i) {<div class="skeleton"></div>}</div>
+        } @else if (store.history.error()) {
+          <p class="alert">Erro ao carregar o histórico.</p>
+        } @else {
+          <div class="list">
+            @for (item of store.history.value(); track item.track.trackId) {
+              <app-track-card [track]="item.track">
+                <p class="stats">
+                  <span>▶ {{ item.timesListened }} {{ item.timesListened === 1 ? 'play' : 'plays' }}</span>
+                  <span>desde {{ item.listenDate | date: 'MMM/yyyy' }}</span>
+                </p>
+                <span trackAside class="like" [class.liked]="item.liked" [attr.aria-label]="item.liked ? 'Curtiu' : 'Não curtiu'">
+                  {{ item.liked ? '♥' : '♡' }}
+                </span>
+              </app-track-card>
+            } @empty {
+              <p class="muted">Este usuário ainda não ouviu nenhuma música.</p>
+            }
+          </div>
+        }
+      </section>
+
+      <section class="panel" aria-labelledby="recommendations-title" [attr.data-algorithm]="store.activeAlgorithm()">
+        <div class="panel-head">
+          <h2 id="recommendations-title">Recomendadas para você</h2>
+          @if (store.recommendations.hasValue()) {
+            <span class="pill">{{ store.recommendations.value().length }}</span>
+          }
+          @if (store.activeAlgorithm(); as active) {
+            <button type="button" class="clear" (click)="store.toggleAlgorithm(active)">
+              Filtro: {{ algorithmTitle(active) }} ✕
+            </button>
+          }
+        </div>
+
+        @if (store.recommendations.isLoading()) {
+          <div class="skeletons">@for (i of [1, 2, 3, 4]; track i) {<div class="skeleton"></div>}</div>
+        } @else if (store.recommendations.error()) {
+          <p class="alert">Erro ao gerar recomendações.</p>
+        } @else {
+          <div class="list">
+            @for (recommendation of store.recommendations.value(); track recommendation.track.trackId) {
+              <app-track-card [track]="recommendation.track" [state]="stateOf(recommendation)">
+                <ul class="reasons">
+                  @for (algorithm of recommendation.algorithms; track algorithm; let i = $index) {
+                    <li [attr.data-algorithm]="algorithm" [title]="algorithmTitle(algorithm)">
+                      {{ recommendation.reasons[i] }}
+                    </li>
+                  }
+                </ul>
+              </app-track-card>
+            } @empty {
+              <p class="muted">Nenhuma recomendação nova para este usuário.</p>
+            }
+          </div>
+        }
+      </section>
+    </div>
+  }
+</main>

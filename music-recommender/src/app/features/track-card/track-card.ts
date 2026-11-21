@@ -1,0 +1,27 @@
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+import { Track } from '../../domain/models';
+import { DurationPipe } from '../../shared/duration.pipe';
+
+export type TrackCardState = 'default' | 'highlighted' | 'dimmed';
+
+@Component({
+  selector: 'app-track-card',
+  imports: [DurationPipe],
+  templateUrl: './track-card.html',
+  styleUrl: './track-card.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[attr.data-state]': 'state()' },
+})
+export class TrackCard {
+  readonly track = input.required<Track>();
+  readonly state = input<TrackCardState>('default');
+
+  protected readonly year = computed(() => this.track().release.slice(0, 4));
+
+  /** Deterministic gradient so each track keeps the same cover colour. */
+  protected readonly cover = computed(() => {
+    const hash = [...this.track().name].reduce((acc, char) => (acc * 31 + char.charCodeAt(0)) >>> 0, 7);
+    const hue = hash % 360;
+    return `linear-gradient(135deg, hsl(${hue} 70% 58%), hsl(${(hue + 50) % 360} 75% 42%))`;
+  });
+}

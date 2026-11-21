@@ -1,0 +1,18 @@
+<button
+  type="button"
+  class="card"
+  [class.active]="active()"
+  [attr.aria-pressed]="active()"
+  (click)="toggled.emit()"
+>
+  <header>
+    <span class="dot" aria-hidden="true"></span>
+    <h3>{{ algorithm().title }}</h3>
+    @if (count() !== null) {
+      <span class="count">{{ count() }}</span>
+    }
+  </header>
+  <p class="description">{{ algorithm().description }}</p>
+  <pre class="cypher"><code [innerHTML]="cypherHtml()"></code></pre>
+  <span class="hint">{{ active() ? 'Destacando recomendações · clique para limpar' : 'Clique para destacar as recomendações' }}</span>
+</button>

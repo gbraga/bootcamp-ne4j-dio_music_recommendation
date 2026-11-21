@@ -1,0 +1,26 @@
+<div class="picker">
+  <label for="user-select">Ouvinte</label>
+  <div class="select" [class.loading]="loadingMessage()">
+    <select
+      id="user-select"
+      [disabled]="!!loadingMessage()"
+      [value]="selected()?.userId ?? ''"
+      (change)="selectedChange.emit($any($event.target).value)"
+    >
+      <option value="" disabled>{{ loadingMessage() ?? 'Selecione um usuário…' }}</option>
+      @for (user of users(); track user.userId) {
+        <option [value]="user.userId">{{ flagOf(user.nationality) }} {{ user.name }}</option>
+      }
+    </select>
+  </div>
+</div>
+
+@if (selected(); as user) {
+  <div class="profile">
+    <span class="avatar">{{ initialsOf(user.name) }}</span>
+    <div>
+      <strong>{{ user.name }}</strong>
+      <span>{{ user.age }} anos · {{ flagOf(user.nationality) }} {{ user.nationality ?? 'Nacionalidade desconhecida' }}</span>
+    </div>
+  </div>
+}

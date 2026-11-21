@@ -1,0 +1,9 @@
+# Credenciais do Neo4j AuraDB
+.env
+
+# Node
+node_modules/
+
+# Sistema
+.DS_Store
+Thumbs.db

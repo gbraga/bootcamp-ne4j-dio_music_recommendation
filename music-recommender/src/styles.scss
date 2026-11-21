@@ -1,0 +1,88 @@
+:root {
+  --brand: #4f46e5;
+  --brand-2: #9333ea;
+
+  --bg: #f5f6fb;
+  --surface: #ffffff;
+  --surface-muted: #eef0f6;
+  --border: #e3e6ef;
+  --text: #141726;
+  --text-muted: #555b70;
+  --text-subtle: #8a90a3;
+
+  --code-bg: #12141f;
+  --code-text: #d7dae6;
+
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-sm: 0 1px 2px rgb(20 23 38 / 0.06), 0 1px 3px rgb(20 23 38 / 0.04);
+  --shadow-md: 0 10px 25px -10px rgb(20 23 38 / 0.2);
+
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --algo: var(--brand);
+  --algo-soft: rgb(79 70 229 / 0.12);
+}
+
+/* One colour per recommendation algorithm, shared by cards, badges and highlights. */
+[data-algorithm='same-age'] {
+  --algo: #7c3aed;
+  --algo-soft: rgb(124 58 237 / 0.12);
+}
+
+[data-algorithm='from-artists'] {
+  --algo: #0d9488;
+  --algo-soft: rgb(13 148 136 / 0.12);
+}
+
+[data-algorithm='top-tracks'] {
+  --algo: #d97706;
+  --algo-soft: rgb(217 119 6 / 0.14);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: min(1200px, 100% - 2.5rem);
+  margin-inline: auto;
+}
+
+/* Cypher syntax highlighting (generated via innerHTML, so it must be global). */
+.cy-keyword {
+  color: #c4b5fd;
+  font-weight: 600;
+}
+
+.cy-label {
+  color: #5eead4;
+}
+
+.cy-param {
+  color: #fbbf24;
+}
+
+.cy-fn {
+  color: #93c5fd;
+}
+
+.cy-string {
+  color: #86efac;
+}
+
+.cy-comment {
+  color: #6b7280;
+  font-style: italic;
+}
